@@ -1,64 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Cpu, Database, Repeat, GraduationCap, Activity, Sparkles, Crosshair } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Sliders, Clock, DollarSign, Zap, Sparkles, TrendingUp } from 'lucide-react';
 
 export const HeroInteractiveCore = () => {
   const canvasRef = useRef(null);
-  const [activeMode, setActiveMode] = useState('bi');
-  const [hoveredTelemetry, setHoveredTelemetry] = useState(null);
+  
+  // Interactive Slider State (PUNTO 4: Volume of monthly records processed)
+  const [dataVolume, setDataVolume] = useState(250000); // Default 250k records
 
-  const modes = [
-    {
-      id: 'bi',
-      name: 'BI & Data Pipelines',
-      icon: Database,
-      primaryColor: '#3B82F6',
-      secondaryColor: '#60A5FA',
-      glowColor: 'rgba(59, 130, 246, 0.5)',
-      speed: 0.004,
-      readout: '12.4 GB/s Ingestion',
-      badge: 'ETL & Data Warehousing',
-    },
-    {
-      id: 'predictive',
-      name: 'Modelos Predictivos AI',
-      icon: Cpu,
-      primaryColor: '#818CF8',
-      secondaryColor: '#C084FC',
-      glowColor: 'rgba(129, 140, 248, 0.5)',
-      speed: 0.007,
-      readout: '99.4% Accurancy',
-      badge: 'Machine Learning',
-    },
-    {
-      id: 'finances',
-      name: 'Automatización Financiera',
-      icon: Repeat,
-      primaryColor: '#10B981',
-      secondaryColor: '#F59E0B',
-      glowColor: 'rgba(16, 185, 129, 0.5)',
-      speed: 0.005,
-      readout: '15,400+ Conciliaciones/m',
-      badge: 'Cashflow Auto',
-    },
-    {
-      id: 'eduorbit',
-      name: 'EduOrbit 360',
-      icon: GraduationCap,
-      primaryColor: '#06B6D4',
-      secondaryColor: '#10B981',
-      glowColor: 'rgba(6, 182, 212, 0.5)',
-      speed: 0.003,
-      readout: 'Visión 360° Institucional',
-      badge: 'Gestión Escolar',
-    },
-  ];
+  // Calculations for Business Impact
+  const hoursSaved = Math.round((dataVolume / 10000) * 3.8) + 24;
+  const estimatedSavings = Math.round(hoursSaved * 32);
+  const acceleration = (3.0 + (dataVolume / 1000000) * 2.5).toFixed(1);
 
-  const currentMode = modes.find((m) => m.id === activeMode);
-
-  // References for render loop
-  const activeModeRef = useRef(currentMode);
-  activeModeRef.current = currentMode;
+  // Reference for 60fps canvas loop
+  const volumeRef = useRef(dataVolume);
+  volumeRef.current = dataVolume;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -77,94 +34,57 @@ export const HeroInteractiveCore = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // 3D Sphere Points Setup with Node Telemetry Data
-    const numPoints = 120;
+    // 3D Sphere Points Setup
+    const numPoints = 130;
     const points = [];
     const radius = Math.min(width, height) * 0.35;
-
-    const telemetryTopics = [
-      'Ingesta Pipeline ETL',
-      'Modelo Predicción Venta',
-      'Conciliación Bancaria',
-      'Asistencia Escolar',
-      'Matrícula Proyectada',
-      'Cluster Biomasa Centro',
-      'Gobernanza de Datos',
-      'Margen Operativo',
-      'Alerta Temprana Deserción',
-      'Consolidado Simce',
-    ];
 
     for (let i = 0; i < numPoints; i++) {
       const phi = Math.acos(-1 + (2 * i) / numPoints);
       const theta = Math.sqrt(numPoints * Math.PI) * phi;
       points.push({
-        id: i + 1,
         x: radius * Math.cos(theta) * Math.sin(phi),
         y: radius * Math.sin(theta) * Math.sin(phi),
         z: radius * Math.cos(phi),
-        topic: telemetryTopics[i % telemetryTopics.length],
-        status: (95 + (i % 5) * 1.1).toFixed(1) + '%',
       });
     }
 
     let rotX = 0;
     let rotY = 0;
 
-    let mouseX = 0;
-    let mouseY = 0;
-
-    const handleMouseMove = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      mouseX = x;
-      mouseY = y;
-    };
-
-    const handleMouseLeave = () => {
-      mouseX = -1000;
-      mouseY = -1000;
-      setHoveredTelemetry(null);
-    };
-
-    const parent = canvas.parentElement;
-    parent.addEventListener('mousemove', handleMouseMove);
-    parent.addEventListener('mouseleave', handleMouseLeave);
-
-    // Render loop
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
 
-      const mode = activeModeRef.current;
+      const vol = volumeRef.current;
+      const speedMultiplier = 1 + (vol / 1000000) * 1.5;
+      const glowIntensity = 0.35 + (vol / 5000000) * 0.4;
+
       const centerX = width / 2;
       const centerY = height / 2;
 
-      rotX += mode.speed;
-      rotY += mode.speed * 1.2;
+      rotX += 0.003 * speedMultiplier;
+      rotY += 0.004 * speedMultiplier;
 
-      // Radial Core Glow
+      // Dynamic Radial Core Glow scaled by volume slider
       const gradient = ctx.createRadialGradient(
         centerX,
         centerY,
         10,
         centerX,
         centerY,
-        radius * 1.25
+        radius * (1.2 + (vol / 5000000) * 0.3)
       );
-      gradient.addColorStop(0, mode.glowColor);
-      gradient.addColorStop(0.6, mode.glowColor.replace('0.5', '0.12'));
+      gradient.addColorStop(0, `rgba(59, 130, 246, ${glowIntensity})`);
+      gradient.addColorStop(0.5, `rgba(99, 102, 241, ${glowIntensity * 0.4})`);
       gradient.addColorStop(1, 'rgba(8, 12, 20, 0)');
 
       ctx.fillStyle = gradient;
       ctx.beginPath();
-      ctx.arc(centerX, centerY, radius * 1.25, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, radius * 1.3, 0, Math.PI * 2);
       ctx.fill();
 
       // Project Points
       const projected = [];
-      let closestHovered = null;
-      let minDistance = 24;
 
       points.forEach((p) => {
         // Rotate Y
@@ -179,25 +99,11 @@ export const HeroInteractiveCore = () => {
         const px = x1 * scale + centerX;
         const py = y2 * scale + centerY;
 
-        // Check cursor hover proximity
-        const dx = mouseX - px;
-        const dy = mouseY - py;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < minDistance && z2 > 0) {
-          minDistance = dist;
-          closestHovered = { id: p.id, topic: p.topic, status: p.status, px, py };
-        }
-
-        projected.push({ id: p.id, px, py, z: z2, scale, topic: p.topic, status: p.status });
+        projected.push({ px, py, z: z2, scale });
       });
 
-      // Update hover state for tooltip
-      if (closestHovered) {
-        setHoveredTelemetry(closestHovered);
-      }
-
-      // Draw Synaptic Connections
+      // Draw Synaptic Mesh Connections (density scales with volume)
+      const connectionMaxDist = 65 + (vol / 5000000) * 15;
       for (let i = 0; i < projected.length; i++) {
         for (let j = i + 1; j < projected.length; j++) {
           const p1 = projected[i];
@@ -206,55 +112,41 @@ export const HeroInteractiveCore = () => {
           const dy = p1.py - p2.py;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 65) {
-            const alpha = (1 - dist / 65) * ((p1.z + radius) / (radius * 2)) * 0.35;
+          if (dist < connectionMaxDist) {
+            const alpha = (1 - dist / connectionMaxDist) * ((p1.z + radius) / (radius * 2)) * 0.4;
             ctx.beginPath();
             ctx.moveTo(p1.px, p1.py);
             ctx.lineTo(p2.px, p2.py);
-            ctx.strokeStyle = mode.primaryColor;
-            ctx.globalAlpha = alpha;
-            ctx.lineWidth = 0.75;
+            ctx.strokeStyle = `rgba(96, 165, 250, ${alpha})`;
+            ctx.lineWidth = 0.75 + (vol / 5000000) * 0.5;
             ctx.stroke();
-            ctx.globalAlpha = 1.0;
           }
         }
       }
 
       // Draw Nodes
       projected.forEach((p) => {
-        const size = Math.max(1.2, ((p.z + radius) / (radius * 2)) * 3.5);
+        const size = Math.max(1.2, ((p.z + radius) / (radius * 2)) * (3.5 + (vol / 5000000)));
         const alpha = Math.max(0.2, (p.z + radius) / (radius * 2));
-        const isHoveredNode = closestHovered && closestHovered.id === p.id;
 
         ctx.beginPath();
-        ctx.arc(p.px, p.py, isHoveredNode ? size * 2 : size, 0, Math.PI * 2);
-        ctx.fillStyle = isHoveredNode ? '#FFFFFF' : p.z > 0 ? mode.primaryColor : mode.secondaryColor;
+        ctx.arc(p.px, p.py, size, 0, Math.PI * 2);
+        ctx.fillStyle = p.z > 0 ? '#60A5FA' : '#818CF8';
         ctx.globalAlpha = alpha;
-        ctx.shadowBlur = isHoveredNode ? 18 : 8;
-        ctx.shadowColor = mode.primaryColor;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#3B82F6';
         ctx.fill();
         ctx.shadowBlur = 0;
         ctx.globalAlpha = 1.0;
-
-        // Hover Ring
-        if (isHoveredNode) {
-          ctx.beginPath();
-          ctx.arc(p.px, p.py, size * 3.2, 0, Math.PI * 2);
-          ctx.strokeStyle = '#FFFFFF';
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
-        }
       });
 
-      // Radar Sweep
-      const time = Date.now() * 0.002;
+      // Dynamic Radar Sweep
+      const time = Date.now() * (0.002 * speedMultiplier);
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius * 0.96, time % (Math.PI * 2), (time + 0.8) % (Math.PI * 2));
-      ctx.strokeStyle = mode.primaryColor;
-      ctx.globalAlpha = 0.4;
-      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'rgba(59, 130, 246, 0.5)';
+      ctx.lineWidth = 2.5;
       ctx.stroke();
-      ctx.globalAlpha = 1.0;
 
       animationFrameId = requestAnimationFrame(animate);
     };
@@ -263,10 +155,6 @@ export const HeroInteractiveCore = () => {
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      if (parent) {
-        parent.removeEventListener('mousemove', handleMouseMove);
-        parent.removeEventListener('mouseleave', handleMouseLeave);
-      }
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -274,75 +162,84 @@ export const HeroInteractiveCore = () => {
   return (
     <div className="relative w-full flex flex-col items-center justify-center select-none">
       
-      {/* PUNTO 1: Mode Switcher Tabs */}
-      <div className="w-full flex flex-wrap items-center justify-center gap-2 mb-4">
-        {modes.map((mode) => {
-          const Icon = mode.icon;
-          const isActive = mode.id === activeMode;
-          return (
-            <button
-              key={mode.id}
-              onClick={() => setActiveMode(mode.id)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-300 ${
-                isActive
-                  ? 'bg-slate-800 text-white border border-blue-400/80 shadow-[0_0_15px_rgba(59,130,246,0.3)] scale-105'
-                  : 'bg-slate-900/60 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700'
-              }`}
-            >
-              <Icon className="w-3.5 h-3.5" style={{ color: mode.primaryColor }} />
-              <span>{mode.name}</span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* 3D Interactive Canvas Container */}
-      <div className="relative w-full h-[360px] sm:h-[440px] flex items-center justify-center">
-        <canvas ref={canvasRef} className="w-full h-full cursor-crosshair" />
+      {/* 3D Interactive Canvas */}
+      <div className="relative w-full h-[320px] sm:h-[400px] flex items-center justify-center">
+        <canvas ref={canvasRef} className="w-full h-full" />
 
         {/* Outer Orbit Rings */}
-        <div className="absolute w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] border border-blue-500/20 rounded-full pointer-events-none animate-orbit-rotate" />
-        <div className="absolute w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] border border-indigo-500/20 rounded-full pointer-events-none animate-orbit-rotate-reverse" />
+        <div className="absolute w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] border border-blue-500/20 rounded-full pointer-events-none animate-orbit-rotate" />
+        <div className="absolute w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] border border-indigo-500/20 rounded-full pointer-events-none animate-orbit-rotate-reverse" />
+      </div>
 
-        {/* PUNTO 2: Floating Telemetry HUD Tooltip on Hover */}
-        <AnimatePresence>
-          {hoveredTelemetry && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              style={{
-                left: Math.min(hoveredTelemetry.px + 15, 260),
-                top: Math.max(hoveredTelemetry.py - 40, 20),
-              }}
-              className="absolute z-20 glass-panel p-3 rounded-2xl border border-blue-400/50 shadow-2xl text-left pointer-events-none min-w-[180px]"
-            >
-              <div className="flex items-center justify-between gap-2 mb-1">
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-blue-300 flex items-center gap-1">
-                  <Crosshair className="w-3 h-3 text-emerald-400 animate-spin" />
-                  Nodo #{hoveredTelemetry.id}
-                </span>
-                <span className="text-[10px] font-bold text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded">
-                  {hoveredTelemetry.status}
-                </span>
-              </div>
-              <p className="text-xs font-bold text-white leading-tight">
-                {hoveredTelemetry.topic}
-              </p>
-              <p className="text-[10px] text-slate-400 mt-1 flex items-center gap-1">
-                <Activity className="w-3 h-3 text-blue-400" />
-                <span>Telemetría en tiempo real</span>
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Mode Readout Status Badge at Bottom */}
-        <div className="absolute bottom-1 glass-panel px-4 py-1.5 rounded-full border border-blue-500/30 text-xs font-bold text-slate-200 flex items-center gap-2 shadow-lg">
-          <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-          <span>{currentMode.badge}:</span>
-          <span className="text-orbit-blue-glow">{currentMode.readout}</span>
+      {/* PUNTO 4: Interactive Business Impact Simulator HUD */}
+      <div className="w-full glass-panel p-5 rounded-3xl border border-blue-500/30 shadow-2xl space-y-4">
+        
+        {/* Slider Controls Header */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+          <div className="flex items-center gap-2 text-xs sm:text-sm font-extrabold text-white">
+            <Sliders className="w-4 h-4 text-orbit-blue-glow" />
+            <span>Simulador de Impacto en Negocio</span>
+          </div>
+          
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold border border-blue-500/30">
+            <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+            <span>{dataVolume.toLocaleString()} registros / mes</span>
+          </div>
         </div>
+
+        {/* Range Slider Control */}
+        <div>
+          <div className="flex justify-between text-[11px] font-semibold text-slate-400 mb-1.5">
+            <span>10,000 registros</span>
+            <span>2.5 Millones</span>
+            <span>5.0 Millones</span>
+          </div>
+          <input
+            type="range"
+            min="10000"
+            max="5000000"
+            step="10000"
+            value={dataVolume}
+            onChange={(e) => setDataVolume(Number(e.target.value))}
+            className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-orbit-blue"
+          />
+        </div>
+
+        {/* Live Business Impact Metrics Cards */}
+        <div className="grid grid-cols-3 gap-3 pt-1">
+          
+          <div className="bg-slate-900/90 p-3 rounded-2xl border border-blue-500/20 text-center">
+            <div className="flex items-center justify-center gap-1 text-slate-400 mb-1">
+              <Clock className="w-3.5 h-3.5 text-sky-400" />
+              <span className="text-[10px] font-bold">Horas Ahorradas</span>
+            </div>
+            <p className="text-base sm:text-xl font-extrabold text-white">
+              {hoursSaved} <span className="text-[10px] font-normal text-slate-400">hrs/mes</span>
+            </p>
+          </div>
+
+          <div className="bg-slate-900/90 p-3 rounded-2xl border border-emerald-500/20 text-center">
+            <div className="flex items-center justify-center gap-1 text-slate-400 mb-1">
+              <DollarSign className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-[10px] font-bold">Ahorro Operativo</span>
+            </div>
+            <p className="text-base sm:text-xl font-extrabold text-emerald-400">
+              ${estimatedSavings.toLocaleString()} <span className="text-[10px] font-normal text-slate-400">USD</span>
+            </p>
+          </div>
+
+          <div className="bg-slate-900/90 p-3 rounded-2xl border border-indigo-500/20 text-center">
+            <div className="flex items-center justify-center gap-1 text-slate-400 mb-1">
+              <Zap className="w-3.5 h-3.5 text-amber-400" />
+              <span className="text-[10px] font-bold">Aceleración</span>
+            </div>
+            <p className="text-base sm:text-xl font-extrabold text-amber-300">
+              {acceleration}x
+            </p>
+          </div>
+
+        </div>
+
       </div>
 
     </div>
