@@ -19,12 +19,7 @@ import {
   ChevronUp,
   CheckCircle2,
   Send,
-  Mail,
-  Phone,
-  MapPin,
-  Linkedin,
-  Twitter,
-  Github
+  Sparkles
 } from 'lucide-react';
 
 export const EduOrbitPage = () => {
@@ -84,25 +79,25 @@ export const EduOrbitPage = () => {
       title: 'Unificamos todo en un solo lugar',
       desc: 'Un director puede ver en un solo dashboard asistencia, desempeño académico y proyección de matrícula sin buscar en múltiples sistemas.',
       icon: Database,
-      bg: 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300',
+      bg: 'bg-emerald-600 border-emerald-500 text-white shadow-[0_0_25px_rgba(16,185,129,0.3)]',
     },
     {
       title: 'Automatizamos tus reportes',
       desc: 'En lugar de consolidar reportes manualmente cada mes, un colegio tendrá dashboards listos y actualizados en tiempo real con un solo clic.',
       icon: RefreshCw,
-      bg: 'bg-purple-500/20 border-purple-500/40 text-purple-300',
+      bg: 'bg-[#1D4ED8] border-blue-500 text-white shadow-[0_0_25px_rgba(29,78,216,0.3)]',
     },
     {
       title: 'Proporcionamos análisis para decisiones con sustento',
       desc: 'Si la plataforma detecta caída en la asistencia de ciertos niveles, se genera una alerta para tomar acción de inmediato.',
       icon: BarChart3,
-      bg: 'bg-purple-500/20 border-purple-500/40 text-purple-300',
+      bg: 'bg-[#1D4ED8] border-blue-500 text-white shadow-[0_0_25px_rgba(29,78,216,0.3)]',
     },
     {
       title: 'Optimizamos la gestión administrativa',
       desc: 'En lugar de que un equipo administrativo pase horas generando informes, pueden dedicar ese tiempo a implementar estrategias educativas.',
       icon: School,
-      bg: 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300',
+      bg: 'bg-emerald-600 border-emerald-500 text-white shadow-[0_0_25px_rgba(16,185,129,0.3)]',
     },
   ];
 
@@ -154,13 +149,13 @@ export const EduOrbitPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#070A12] text-white selection:bg-blue-600 selection:text-white font-sans">
+    <div className="min-h-screen bg-[#070A12] text-white selection:bg-emerald-500 selection:text-white font-sans">
       
       {/* Sticky Header with High-Resolution EduOrbit 360 Logo */}
       <header className="fixed top-0 left-0 right-0 z-50 glass-nav py-4 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <Link to="/" className="inline-flex items-center gap-2 text-slate-300 hover:text-white font-semibold text-sm transition group">
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform text-orbit-blue" />
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform text-emerald-400" />
             <span>Volver a DataOrbit</span>
           </Link>
 
@@ -168,13 +163,13 @@ export const EduOrbitPage = () => {
             <img
               src="/logos/Eduview 360 blanco_v2.png"
               alt="EduOrbit 360 HD Logo"
-              className="h-9 sm:h-11 w-auto object-contain filter drop-shadow-[0_0_12px_rgba(59,130,246,0.4)]"
+              className="h-8 sm:h-10 w-auto object-contain filter drop-shadow-[0_0_12px_rgba(16,185,129,0.4)]"
             />
           </div>
 
           <a
             href="#contacto-edu"
-            className="px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm text-white bg-blue-600 hover:bg-blue-500 shadow-md transition hover:scale-105"
+            className="px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm text-white bg-emerald-600 hover:bg-emerald-500 shadow-md transition hover:scale-105"
           >
             Contacto Colegio
           </a>
@@ -182,20 +177,20 @@ export const EduOrbitPage = () => {
       </header>
 
       {/* Hero Section 360 */}
-      <section className="relative pt-36 pb-20 px-4 sm:px-6 lg:px-8 text-center bg-gradient-to-b from-[#080D1A] via-[#090F24] to-[#070A12] overflow-hidden">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-blue-600/15 rounded-full blur-[150px] pointer-events-none" />
+      <section className="relative pt-36 pb-20 px-4 sm:px-6 lg:px-8 text-center bg-gradient-to-b from-[#061118] via-[#091522] to-[#070A12] overflow-hidden">
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-emerald-500/15 rounded-full blur-[150px] pointer-events-none" />
 
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
           <img
             src="/logos/Eduview 360 blanco_v2.png"
             alt="EduOrbit 360 HD Logo"
-            className="h-28 sm:h-40 w-auto mb-8 object-contain filter drop-shadow-[0_0_30px_rgba(59,130,246,0.6)]"
+            className="h-28 sm:h-40 w-auto mb-8 object-contain filter drop-shadow-[0_0_30px_rgba(16,185,129,0.6)]"
           />
 
           <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight">
             EduOrbit <span className="text-amber-400">360</span>
           </h1>
-          <p className="mt-4 text-xl sm:text-3xl font-extrabold bg-gradient-to-r from-blue-300 via-amber-300 to-indigo-300 bg-clip-text text-transparent">
+          <p className="mt-4 text-xl sm:text-3xl font-extrabold bg-gradient-to-r from-emerald-300 via-amber-300 to-blue-300 bg-clip-text text-transparent">
             Visión integral para una Educación más Eficiente
           </p>
 
@@ -208,11 +203,11 @@ export const EduOrbitPage = () => {
       {/* SECTION 1: El problema */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#F1F5F9] text-slate-900">
         <div className="max-w-5xl mx-auto text-center mb-14">
-          <span className="text-xs font-bold uppercase tracking-widest text-blue-600 bg-blue-100 px-3.5 py-1.5 rounded-full border border-blue-200">
+          <span className="text-xs font-bold uppercase tracking-widest text-blue-700 bg-blue-100 px-3.5 py-1.5 rounded-full border border-blue-200">
             Diagnóstico Institucional
           </span>
           <h2 className="mt-4 text-3xl sm:text-5xl font-extrabold tracking-tight">
-            El <span className="text-blue-600">problema</span>
+            El <span className="text-blue-700">problema</span>
           </h2>
         </div>
 
@@ -225,7 +220,7 @@ export const EduOrbitPage = () => {
               <button
                 onClick={() => setActiveProblem(activeProblem === item.id ? null : item.id)}
                 className={`w-full p-5 text-left font-bold text-base sm:text-lg flex items-center justify-between ${
-                  item.id === 0 ? 'bg-blue-600 text-white' : 'bg-amber-500 text-white'
+                  item.id === 0 ? 'bg-[#1D4ED8] text-white' : 'bg-amber-500 text-white'
                 }`}
               >
                 <span className="flex items-center gap-3">
@@ -254,7 +249,7 @@ export const EduOrbitPage = () => {
         </p>
       </section>
 
-      {/* SECTION 2: Nuestra solución */}
+      {/* SECTION 2: Nuestra solución (Verde Esmeralda & Cobalto) */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900 text-white">
         <div className="max-w-5xl mx-auto text-center mb-14">
           <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/60 px-3.5 py-1.5 rounded-full border border-emerald-500/30">
@@ -271,16 +266,16 @@ export const EduOrbitPage = () => {
             return (
               <div
                 key={idx}
-                className={`rounded-3xl p-8 border backdrop-blur-md ${sol.bg} flex flex-col justify-between shadow-xl`}
+                className={`rounded-3xl p-8 border ${sol.bg} flex flex-col justify-between hover:-translate-y-1 transition duration-300`}
               >
                 <div>
-                  <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center mb-6">
-                    <Icon className="w-7 h-7" />
+                  <div className="w-14 h-14 rounded-2xl bg-white/15 flex items-center justify-center mb-6">
+                    <Icon className="w-7 h-7 text-white" />
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
                     {sol.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-normal">
+                  <p className="text-sm sm:text-base text-slate-100 leading-relaxed font-normal">
                     {sol.desc}
                   </p>
                 </div>
@@ -338,7 +333,7 @@ export const EduOrbitPage = () => {
             {modules.map((mod, idx) => {
               const Icon = mod.icon;
               return (
-                <div key={idx} className="bg-blue-600 text-white rounded-3xl p-6 text-center flex flex-col items-center justify-center shadow-lg hover:bg-blue-700 transition hover:-translate-y-1">
+                <div key={idx} className="bg-[#1D4ED8] hover:bg-[#1E40AF] text-white rounded-3xl p-6 text-center flex flex-col items-center justify-center shadow-lg transition hover:-translate-y-1">
                   <Icon className="w-8 h-8 mb-3 text-blue-200" />
                   <h4 className="font-bold text-base mb-1">{mod.title}</h4>
                   <p className="text-xs text-blue-100 font-medium">{mod.desc}</p>
@@ -352,7 +347,7 @@ export const EduOrbitPage = () => {
       {/* SECTION 4: Ejemplo Tableros */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-950 text-white text-center">
         <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight mb-12">
-          Ejemplo <span className="text-blue-400">tablero</span>
+          Ejemplo <span className="text-emerald-400">tablero</span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           <div className="rounded-3xl overflow-hidden border border-slate-700 shadow-2xl hover:scale-[1.02] transition">
@@ -454,7 +449,7 @@ export const EduOrbitPage = () => {
               <div className="text-right pt-2">
                 <button
                   type="submit"
-                  className="px-10 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm shadow-lg transition"
+                  className="px-10 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg transition"
                 >
                   Enviar
                 </button>
