@@ -1,0 +1,260 @@
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Send, CheckCircle, Mail, Phone, MapPin, Sparkles } from 'lucide-react';
+
+export const Contact = () => {
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    nombreCompleto: '',
+    empresa: '',
+    telefono: '',
+    correo: '',
+    asunto: '',
+    mensaje: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setSubmitted(true);
+    }, 1200);
+  };
+
+  return (
+    <section id="contacto" className="relative py-24 bg-[#EAF0F8] text-slate-900 overflow-hidden border-t border-slate-300">
+      
+      {/* Background Orbit circles */}
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] border border-slate-300/60 rounded-full pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          {/* Form Side (Matching white form card with soft blue fields from PDF) */}
+          <div className="lg:col-span-7 bg-white rounded-3xl p-8 sm:p-10 shadow-2xl border border-slate-200">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-2">
+              Envíanos un mensaje
+            </h3>
+            <p className="text-slate-600 text-sm mb-8 font-medium">
+              Completa todos los campos marcados con (*) y te responderemos en menos de 24 horas.
+            </p>
+
+            {submitted ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="py-12 text-center"
+              >
+                <CheckCircle className="w-16 h-16 text-emerald-500 mx-auto mb-4 animate-bounce" />
+                <h4 className="text-2xl font-bold text-slate-900 mb-2">¡Mensaje Enviado con Éxito!</h4>
+                <p className="text-slate-600 text-base max-w-md mx-auto">
+                  Gracias por comunicarte con DataOrbit. Nuestro equipo de ingenieros y especialistas revisará tu requerimiento y te contactará a la brevedad.
+                </p>
+                <button
+                  onClick={() => {
+                    setSubmitted(false);
+                    setFormData({
+                      nombreCompleto: '',
+                      empresa: '',
+                      telefono: '',
+                      correo: '',
+                      asunto: '',
+                      mensaje: '',
+                    });
+                  }}
+                  className="mt-6 px-6 py-2.5 rounded-full bg-orbit-blue text-white font-bold text-sm shadow-md hover:bg-blue-700 transition"
+                >
+                  Enviar otro mensaje
+                </button>
+              </motion.div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                
+                {/* Row 1: Nombre completo & Empresa */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                      Nombre completo <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="nombreCompleto"
+                      required
+                      placeholder="Nombre completo"
+                      value={formData.nombreCompleto}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl bg-[#EDF3FC] border border-blue-200/80 text-slate-900 text-sm focus:outline-none focus:border-orbit-blue focus:bg-white transition"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                      Empresa <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="empresa"
+                      required
+                      placeholder="Empresa"
+                      value={formData.empresa}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl bg-[#EDF3FC] border border-blue-200/80 text-slate-900 text-sm focus:outline-none focus:border-orbit-blue focus:bg-white transition"
+                    />
+                  </div>
+                </div>
+
+                {/* Row 2: Teléfono & Correo electrónico */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                      Teléfono <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      name="telefono"
+                      required
+                      placeholder="Teléfono"
+                      value={formData.telefono}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl bg-[#EDF3FC] border border-blue-200/80 text-slate-900 text-sm focus:outline-none focus:border-orbit-blue focus:bg-white transition"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                      Correo electrónico <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      name="correo"
+                      required
+                      placeholder="Correo electrónico"
+                      value={formData.correo}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl bg-[#EDF3FC] border border-blue-200/80 text-slate-900 text-sm focus:outline-none focus:border-orbit-blue focus:bg-white transition"
+                    />
+                  </div>
+                </div>
+
+                {/* Asunto */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                    Asunto <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="asunto"
+                    required
+                    placeholder="Asunto"
+                    value={formData.asunto}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl bg-[#EDF3FC] border border-blue-200/80 text-slate-900 text-sm focus:outline-none focus:border-orbit-blue focus:bg-white transition"
+                  />
+                </div>
+
+                {/* Mensaje */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                    Mensaje <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    name="mensaje"
+                    required
+                    rows="4"
+                    placeholder="Mensaje"
+                    value={formData.mensaje}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl bg-[#EDF3FC] border border-blue-200/80 text-slate-900 text-sm focus:outline-none focus:border-orbit-blue focus:bg-white transition resize-none"
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full sm:w-auto px-10 py-3.5 rounded-full bg-[#3B59C8] hover:bg-[#2F49B0] text-white font-extrabold text-base shadow-lg shadow-blue-600/30 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50"
+                  >
+                    {loading ? (
+                      <span>Procesando...</span>
+                    ) : (
+                      <>
+                        <span>Enviar</span>
+                        <Send className="w-4 h-4" />
+                      </>
+                    )}
+                  </button>
+                </div>
+
+              </form>
+            )}
+
+          </div>
+
+          {/* Right Text & Info Side (Matching text from PDF screenshot) */}
+          <div className="lg:col-span-5 flex flex-col justify-center">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-orbit-blue bg-blue-100 px-3 py-1 rounded-full w-fit mb-4">
+              Contacto Directo
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-6">
+              Contacto
+            </h2>
+            <p className="text-lg text-slate-700 font-medium leading-relaxed mb-8">
+              Llena el formulario a continuación y nos pondremos en contacto contigo lo antes posible.
+              <br />
+              <strong className="text-slate-900">¡Esperamos saber de ti!</strong>
+            </p>
+
+            <div className="space-y-6 pt-4 border-t border-slate-300">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-orbit-blue/10 text-orbit-blue flex items-center justify-center font-bold">
+                  <Mail className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 font-bold">Correo Electrónico</p>
+                  <a href="mailto:contacto@dataorbit.cl" className="text-base font-bold text-slate-900 hover:text-orbit-blue transition">
+                    contacto@dataorbit.cl
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-orbit-blue/10 text-orbit-blue flex items-center justify-center font-bold">
+                  <Phone className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 font-bold">Atención Ejecutiva</p>
+                  <p className="text-base font-bold text-slate-900">
+                    +56 9 8452 1190
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-orbit-blue/10 text-orbit-blue flex items-center justify-center font-bold">
+                  <MapPin className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 font-bold">Ubicación</p>
+                  <p className="text-base font-bold text-slate-900">
+                    Santiago & Puerto Montt, Chile
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+};
