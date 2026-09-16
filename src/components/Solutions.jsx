@@ -1,21 +1,47 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import {
-  BarChart3,
-  Code2,
-  Sparkles,
-  Workflow,
-  Repeat,
-  BrainCircuit,
-  Route,
-  Handshake,
-  ArrowUpRight,
-} from 'lucide-react';
+import { BarChart3, Code2, Sparkles, Workflow, BrainCircuit, Route } from 'lucide-react';
 
 export const Solutions = () => {
   const reduceMotion = useReducedMotion();
 
   const solutions = [
+    {
+      id: 'adopcion-ia',
+      title: 'Adopción de IA',
+      icon: Sparkles,
+      badge: 'Inteligencia Artificial',
+      description:
+        'La inteligencia artificial deja de ser una promesa cuando se conecta a los datos reales de la empresa. Detectar desviaciones antes de que escalen, anticiparse en vez de reaccionar, y sacar del camino el trabajo que hoy consume horas. Definimos dónde aplicarla y con qué resguardos, y la dejamos operando sobre tus propios sistemas mediante agentes conectados por MCP.',
+      highlights: ['Detección temprana de desviaciones', 'Agentes conectados vía MCP', 'Menos carga operativa'],
+    },
+    {
+      id: 'automatizaciones',
+      title: 'Automatizaciones e integraciones',
+      icon: Workflow,
+      badge: 'Automatización de procesos',
+      description:
+        'Sistemas que no se hablan entre sí, datos que alguien copia a mano de un portal a una planilla, reportes que se rehacen todos los meses. Conectamos las piezas y dejamos ese trabajo corriendo solo.',
+      highlights: ['Integración entre sistemas', 'Extracción automatizada', 'Reportes programados'],
+    },
+    {
+      id: 'estrategia-digital',
+      title: 'Estrategias digitales de optimización',
+      icon: Route,
+      badge: 'Estrategia y consultoría',
+      description:
+        'El punto de partida. Levantamos el proceso completo junto a las personas que lo ejecutan, identificamos dónde se pierde tiempo y margen, y priorizamos las intervenciones por impacto antes de escribir una línea de código. De ahí sale la hoja de ruta, y acompañamos su ejecución como contraparte técnica del negocio.',
+      highlights: ['Levantamiento en terreno', 'Priorización por impacto', 'Acompañamiento continuo'],
+    },
+    {
+      id: 'software-medida',
+      title: 'Software a la medida',
+      icon: Code2,
+      badge: 'Desarrollo de producto',
+      description:
+        'Construir software propio dejó de ser caro y lento. Hoy desarrollamos plataformas ajustadas exactamente al proceso de la empresa, en menos tiempo y a menor costo que antes, con margen para pivotear cuando el negocio cambia. Cada plataforma se entrega con IA incorporada, lo que hace mucho más rápido operarla y mantenerla.',
+      highlights: ['Ajustado al proceso real', 'Rápido de pivotear', 'Con IA incorporada'],
+    },
     {
       id: 'bi-data',
       title: 'BI & Ingeniería de Datos',
@@ -26,42 +52,6 @@ export const Solutions = () => {
       highlights: ['Tableros en producción', 'ETL y modelo de datos', 'Trazabilidad y gobierno'],
     },
     {
-      id: 'software-medida',
-      title: 'Software a la medida',
-      icon: Code2,
-      badge: 'Desarrollo de producto',
-      description:
-        'Cuando la herramienta que se necesita no existe en el mercado, la construimos. Desarrollamos plataformas de gestión pensadas para el proceso real de la empresa, no para el promedio de la industria.',
-      highlights: ['CRM y plataformas de gestión', 'Integración con sistemas existentes', 'Despliegue y soporte'],
-    },
-    {
-      id: 'adopcion-ia',
-      title: 'Adopción de IA',
-      icon: Sparkles,
-      badge: 'Inteligencia Artificial',
-      description:
-        'Acompañamos a la organización a incorporar inteligencia artificial en su operación diaria: dónde aplicarla, con qué datos y con qué resguardos. Incluye agentes conectados a los sistemas de la empresa mediante MCP, capaces de trabajar sobre información real.',
-      highlights: ['Diagnóstico de oportunidades', 'Agentes conectados vía MCP', 'Capacitación del equipo'],
-    },
-    {
-      id: 'automatizaciones',
-      title: 'Automatizaciones e integraciones',
-      icon: Workflow,
-      badge: 'Automatización de procesos',
-      description:
-        'Eliminamos el trabajo repetitivo que consume horas del equipo: extracción de datos desde portales y sistemas externos, cruces entre plataformas que no se hablan y generación automática de reportes periódicos.',
-      highlights: ['Integración entre sistemas', 'Extracción automatizada', 'Reportes programados'],
-    },
-    {
-      id: 'fintech-auto',
-      title: 'Automatización financiera',
-      icon: Repeat,
-      badge: 'Finanzas',
-      description:
-        'Automatizamos las tareas críticas del área financiera: clasificación de movimientos bancarios, conciliación, registro contable y gestión del flujo de caja. Menos digitación manual y menos errores arrastrados.',
-      highlights: ['Conciliación desde cartola', 'Flujo de caja proyectado', 'Cumplimiento tributario'],
-    },
-    {
       id: 'predictive',
       title: 'Modelos predictivos',
       icon: BrainCircuit,
@@ -69,24 +59,6 @@ export const Solutions = () => {
       description:
         'Analizamos el historial de la operación para proyectar lo que viene: demanda, costos, resultados productivos o financieros. Modelos construidos sobre los indicadores que el negocio ya usa para decidir.',
       highlights: ['Proyección de demanda y costos', 'Indicadores productivos', 'Escenarios y sensibilidad'],
-    },
-    {
-      id: 'estrategia-digital',
-      title: 'Estrategias digitales de optimización',
-      icon: Route,
-      badge: 'Estrategia Digital',
-      description:
-        'Levantamos el proceso completo junto a las personas que lo ejecutan, identificamos dónde se pierde tiempo y margen, y priorizamos las intervenciones por impacto antes de escribir una línea de código.',
-      highlights: ['Levantamiento en terreno', 'Priorización por impacto', 'Hoja de ruta digital'],
-    },
-    {
-      id: 'partners',
-      title: 'Partners en Gestión Estratégica',
-      icon: Handshake,
-      badge: 'Consultoría',
-      description:
-        'Más que un proveedor puntual, quedamos como contraparte técnica del negocio. Acompañamos las decisiones financieras y operativas en el tiempo, con la información a la vista.',
-      highlights: ['Acompañamiento continuo', 'Contraparte técnica', 'Revisión periódica'],
     },
   ];
 
@@ -170,7 +142,6 @@ export const Solutions = () => {
                     </span>
                   </div>
 
-                  <ArrowUpRight className="w-5 h-5 flex-shrink-0 text-slate-600 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-orbit-blue-glow transition-all duration-300" />
                 </header>
 
                 <p className="mt-5 text-sm sm:text-[15px] text-slate-400 leading-relaxed flex-1">
