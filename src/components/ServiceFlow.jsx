@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { BarChart3, Code2, Sparkles, Workflow, BrainCircuit, Route, ArrowDown } from 'lucide-react';
+import { BarChart3, Code2, Sparkles, Workflow, BrainCircuit, Compass, Gauge, ArrowDown } from 'lucide-react';
 
 /**
  * Cómo se integran los servicios entre sí.
- * Estrategia abre el proceso, dos vías paralelas construyen (datos y software)
- * y la adopción de IA atraviesa todo por debajo.
+ * El diagnóstico abre el proceso, dos vías paralelas construyen (datos y
+ * software), la IA atraviesa ambas y el impacto medido lo cierra.
  */
 export const ServiceFlow = () => {
   const reduceMotion = useReducedMotion();
@@ -52,8 +52,8 @@ export const ServiceFlow = () => {
       <motion.div {...appear()} className="mb-10 text-center">
         <h3 className="text-xl font-bold text-white sm:text-2xl">Cómo se integran</h3>
         <p className="mx-auto mt-2 max-w-xl text-sm text-slate-400 sm:text-base">
-          No son servicios sueltos. Un proyecto parte por entender el proceso y avanza por dos vías
-          que corren en paralelo.
+          No son servicios sueltos. Un proyecto parte por entender el proceso, avanza por dos vías
+          que corren en paralelo, y termina donde empezó: midiendo.
         </p>
       </motion.div>
 
@@ -62,9 +62,9 @@ export const ServiceFlow = () => {
         <motion.div {...appear(0.05)} className="mx-auto max-w-sm">
           <div className="rounded-xl border border-orbit-blue/30 bg-orbit-blue/10 px-5 py-4 text-center">
             <div className="mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-lg border border-orbit-blue/30 bg-orbit-blue/20 text-orbit-blue-glow">
-              <Route className="h-4 w-4" strokeWidth={2} />
+              <Compass className="h-4 w-4" strokeWidth={2} />
             </div>
-            <p className="text-sm font-semibold text-white">Estrategias digitales de optimización</p>
+            <p className="text-sm font-semibold text-white">Diagnóstico de oportunidades</p>
             <p className="mt-1 text-[11px] uppercase tracking-wider text-orbit-blue-glow/70">
               Punto de partida
             </p>
@@ -122,13 +122,37 @@ export const ServiceFlow = () => {
                 <Sparkles className="h-5 w-5" strokeWidth={2} />
               </div>
               <div>
-                <p className="text-base font-bold text-white sm:text-lg">Adopción de IA</p>
+                <p className="text-base font-bold text-white sm:text-lg">
+                  Adopción de IA + agentes conectados
+                </p>
                 <p className="mt-0.5 text-xs text-slate-300 sm:text-sm">
                   Atraviesa las dos vías: va incorporada en el software que construimos y en la forma
                   en que se opera todo lo demás.
                 </p>
               </div>
             </div>
+          </div>
+        </motion.div>
+
+        {/* Conector hacia el cierre */}
+        <div className="flex h-10 items-center justify-center" aria-hidden="true">
+          <span className="hidden h-full w-px bg-white/15 sm:block" />
+          <ArrowDown className="h-4 w-4 text-slate-600 sm:hidden" />
+        </div>
+
+        {/* Cierre: el impacto se mide */}
+        <motion.div {...appear(0.3)} className="mx-auto max-w-sm">
+          <div className="rounded-xl border border-orbit-blue/30 bg-orbit-blue/10 px-5 py-4 text-center">
+            <div className="mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-lg border border-orbit-blue/30 bg-orbit-blue/20 text-orbit-blue-glow">
+              <Gauge className="h-4 w-4" strokeWidth={2} />
+            </div>
+            <p className="text-sm font-semibold text-white">Impacto medido</p>
+            <p className="mt-1 text-[11px] uppercase tracking-wider text-orbit-blue-glow/70">
+              Cierre del ciclo
+            </p>
+            <p className="mt-2 text-xs leading-relaxed text-slate-400">
+              Contra la línea base que levantamos al principio.
+            </p>
           </div>
         </motion.div>
       </div>
