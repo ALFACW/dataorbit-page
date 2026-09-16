@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { BarChart3, Code2, Sparkles, Workflow, BrainCircuit, Route } from 'lucide-react';
+import { ServiceFlow } from './ServiceFlow';
 
 export const Solutions = () => {
   const reduceMotion = useReducedMotion();
@@ -163,6 +164,9 @@ export const Solutions = () => {
             );
           })}
         </div>
+
+        {/* Cómo se integran los servicios entre sí */}
+        <ServiceFlow />
 
         {/* Closing CTA */}
         <div className="mt-14 text-center">
