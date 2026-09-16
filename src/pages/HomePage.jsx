@@ -2,7 +2,6 @@ import React from 'react';
 import { Navbar } from '../components/Navbar';
 import { Hero } from '../components/Hero';
 import { Solutions } from '../components/Solutions';
-import { InteractiveDashboardShowcase } from '../components/InteractiveDashboardShowcase';
 import { Pillars } from '../components/Pillars';
 import { TrustCarousel } from '../components/TrustCarousel';
 import { WhyUs } from '../components/WhyUs';
@@ -16,7 +15,6 @@ export const HomePage = () => {
       <main>
         <Hero />
         <Solutions />
-        <InteractiveDashboardShowcase />
         <Pillars />
         <TrustCarousel />
         <WhyUs />
