@@ -19,6 +19,7 @@ const cases = [
     company: 'MOWI CHILE',
     industry: 'Salmonicultura · Logística & Procesos',
     icon: Ship,
+    logoUrl: '/logos/clients/mowi.svg',
     title: 'BI e Ingeniería de Datos',
     tag: 'BI & Pipelines · Logística',
     challenge:
@@ -35,6 +36,7 @@ const cases = [
     company: 'FEDUCA CORPORACIÓN EDUCACIONAL',
     industry: 'Educación · Gestión Institucional',
     icon: School,
+    logoUrl: null,
     title: 'Modelo Presupuestario Proyectado',
     tag: 'Finanzas & Subvención · Educación',
     challenge:
@@ -51,6 +53,7 @@ const cases = [
     company: 'DATAORBIT · PRODUCTO PROPIO',
     industry: 'Ingeniería de Software & Agentes de IA',
     icon: Bot,
+    logoUrl: '/logos/nuevo-icono-dataorbit.svg',
     title: 'Gestión con Protocolo MCP de IA',
     tag: 'Innovación · Model Context Protocol',
     challenge:
@@ -67,6 +70,7 @@ const cases = [
     company: 'AHV ® INTERNATIONAL',
     industry: 'Salud Animal & Salmonicultura',
     icon: Fish,
+    logoUrl: '/logos/clients/ahv-blanco-2.png',
     title: 'Impulsando la Eficiencia en la Salmonicultura',
     tag: 'Modelo Predictivo · Salmonicultura',
     challenge:
@@ -83,6 +87,7 @@ const cases = [
     company: 'LA PROTECTORA DE LA INFANCIA DESDE 1894',
     industry: 'Educación & Gestión Social',
     icon: GraduationCap,
+    logoUrl: '/logos/clients/la-protectora-blanco-2.png',
     title: 'Transformación Digital en Educación',
     tag: 'Transformación Digital & BI Integral',
     challenge:
@@ -99,6 +104,7 @@ const cases = [
     company: 'IVAN ZAPATA SERVICIOS CONTABLES',
     industry: 'Servicios Contables & Tributarios',
     icon: Calculator,
+    logoUrl: '/logos/clients/iz-blanco.png',
     title: 'Automatización en Contabilidad',
     tag: 'Automatización & Scraping · SII',
     challenge:
@@ -115,6 +121,7 @@ const cases = [
     company: 'HUIRO AGRICULTURA OCEÁNICA REGENERATIVA',
     industry: 'Agricultura Oceánica Regenerativa',
     icon: Waves,
+    logoUrl: '/logos/clients/huiro-blanco.png',
     title: 'Optimización del Flujo de Caja',
     tag: 'BI & Proyección Financiera',
     challenge:
@@ -130,13 +137,13 @@ const cases = [
 ];
 
 const clientLogos = [
-  { name: 'MOWI CHILE', icon: Ship },
-  { name: 'FEDUCA CORPORACIÓN', icon: School },
-  { name: 'AHV ® INTERNATIONAL', icon: Fish },
-  { name: 'LA PROTECTORA DE LA INFANCIA', icon: GraduationCap },
-  { name: 'IVÁN ZAPATA CONTABLES', icon: Calculator },
-  { name: 'HUIRO AGRICULTURA OCEÁNICA', icon: Waves },
-  { name: 'BLUE HEALTH VISION', icon: Building2 },
+  { name: 'MOWI CHILE', logoUrl: '/logos/clients/mowi.svg', icon: Ship },
+  { name: 'AHV ® INTERNATIONAL', logoUrl: '/logos/clients/ahv-blanco-2.png', icon: Fish },
+  { name: 'LA PROTECTORA', logoUrl: '/logos/clients/la-protectora-blanco-2.png', icon: GraduationCap },
+  { name: 'IVÁN ZAPATA', logoUrl: '/logos/clients/iz-blanco.png', icon: Calculator },
+  { name: 'HUIRO OCEÁNICA', logoUrl: '/logos/clients/huiro-blanco.png', icon: Waves },
+  { name: 'FEDUCA CORPORACIÓN', logoUrl: null, icon: School },
+  { name: 'DATAORBIT MCP', logoUrl: '/logos/nuevo-icono-dataorbit.svg', icon: Bot },
 ];
 
 export const TrustCarousel = () => {
@@ -190,10 +197,20 @@ export const TrustCarousel = () => {
                   exit={{ opacity: 0, y: -15 }}
                   transition={{ duration: 0.35 }}
                 >
-                  <div className="flex items-center gap-3 mb-5">
-                    <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center shadow-inner">
-                      <Icon className="w-6 h-6 text-white" />
-                    </div>
+                  <div className="flex flex-wrap items-center gap-4 mb-5">
+                    {current.logoUrl ? (
+                      <div className="h-14 px-4 py-2 rounded-xl bg-white/15 border border-white/25 flex items-center justify-center backdrop-blur-md shadow-sm">
+                        <img
+                          src={current.logoUrl}
+                          alt={current.company}
+                          className="max-h-9 max-w-[150px] w-auto object-contain filter drop-shadow"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center shadow-inner">
+                        <Icon className="w-6 h-6 text-white" />
+                      </div>
+                    )}
                     <div>
                       <h4 className="text-lg sm:text-xl font-extrabold text-white tracking-wide">{current.company}</h4>
                       <p className="text-xs sm:text-sm font-semibold text-blue-200">{current.title} · <span className="text-blue-100/80">{current.industry}</span></p>
@@ -272,17 +289,27 @@ export const TrustCarousel = () => {
         </div>
 
         {/* Real Client Marquee */}
-        <div className="relative overflow-hidden py-4 rounded-2xl bg-white/60 border border-slate-300 shadow-sm">
-          <div className="flex w-[200%] animate-marquee items-center gap-12 sm:gap-16">
+        <div className="relative overflow-hidden py-5 rounded-2xl bg-slate-900 border border-slate-800 shadow-xl">
+          <div className="flex w-[200%] animate-marquee items-center gap-14 sm:gap-20">
             {[...clientLogos, ...clientLogos].map((client, idx) => {
               const ClientIcon = client.icon;
               return (
                 <div
                   key={idx}
-                  className="flex items-center gap-3 text-slate-800 font-bold text-sm sm:text-base whitespace-nowrap opacity-85 hover:opacity-100 transition-opacity"
+                  className="flex items-center gap-3 whitespace-nowrap opacity-85 hover:opacity-100 transition-opacity"
                 >
-                  <ClientIcon className="w-4 h-4 text-orbit-blue flex-shrink-0" />
-                  <span>{client.name}</span>
+                  {client.logoUrl ? (
+                    <img
+                      src={client.logoUrl}
+                      alt={client.name}
+                      className="h-9 max-w-[150px] w-auto object-contain filter drop-shadow brightness-105"
+                    />
+                  ) : (
+                    <div className="flex items-center gap-2.5 text-slate-100 font-bold text-sm sm:text-base tracking-wide">
+                      <ClientIcon className="w-5 h-5 text-orbit-cyan flex-shrink-0" />
+                      <span>{client.name}</span>
+                    </div>
+                  )}
                 </div>
               );
             })}
