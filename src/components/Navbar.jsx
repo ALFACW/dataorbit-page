@@ -22,7 +22,7 @@ export const Navbar = () => {
   const navLinks = [
     { name: 'Soluciones', href: '/#soluciones' },
     { name: '¿Por qué nosotros?', href: '/#por-que-nosotros' },
-    { name: 'Casos de éxito', href: '/#casos-exito' },
+    { name: 'Quiénes confían en nosotros', href: '/#quienes-confian' },
     { name: 'Contacto', href: '/#contacto' },
   ];
 
