@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "pdf:triptico": "node scripts/pdf-triptico.mjs",
-    "package": "vite build && powershell -Command \"Compress-Archive -Path 'dist/*' -DestinationPath 'dataorbit-deploy.zip' -Force\""
+    "package": "vite build && node scripts/package.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

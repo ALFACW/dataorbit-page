@@ -12,6 +12,7 @@ export const Contact = () => {
     correo: '',
     asunto: '',
     mensaje: '',
+    website_url: '', // Honeypot: queda oculto para las personas; si llega con algo, es un bot
   });
 
   const handleChange = (e) => {
@@ -32,6 +33,7 @@ export const Contact = () => {
       correo: formData.correo,
       asunto: formData.asunto,
       mensaje: formData.mensaje,
+      website_url: formData.website_url,
     };
 
     try {
@@ -54,12 +56,9 @@ export const Contact = () => {
           setError(data.error || 'No se pudo enviar el mensaje.');
         }
       } else {
-        // En caso de respuesta sin JSON
-        if (response.ok) {
-          setSubmitted(true);
-        } else {
-          setError('Error en el servidor al enviar el mensaje. Inténtalo de nuevo.');
-        }
+        // Solo se da por enviado si el servidor lo confirma. Una respuesta que no es
+        // JSON (por ejemplo, si el hosting no ejecuta el PHP) cuenta como error.
+        setError('Error en el servidor al enviar el mensaje. Inténtalo de nuevo.');
       }
     } catch {
       setError('Error de conexión. Puedes contactarnos directamente a contacto@dataorbit.cl o al +56 9 8452 1190');
@@ -111,6 +110,7 @@ export const Contact = () => {
                       correo: '',
                       asunto: '',
                       mensaje: '',
+                      website_url: '',
                     });
                   }}
                   className="mt-6 px-6 py-2.5 rounded-full bg-orbit-blue text-white font-bold text-sm shadow-md hover:bg-blue-700 transition"
@@ -120,6 +120,13 @@ export const Contact = () => {
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Honeypot anti-spam: fuera de la vista y del orden de tabulación */}
+                <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+                  <label>
+                    No completar este campo
+                    <input type="text" name="website_url" tabIndex={-1} autoComplete="off" value={formData.website_url} onChange={handleChange} />
+                  </label>
+                </div>
                 
                 {/* Row 1: Nombre completo & Empresa */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
