@@ -69,6 +69,53 @@
   animation: techPulse 3.5s ease-in-out infinite;
 }
 
+/* Grilla técnica de fondo; la variante "drift" la desplaza lentamente */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@keyframes gridDrift {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 40px 40px, 40px 40px; }
+}
+
+.bg-grid-drift {
+  animation: gridDrift 6s linear infinite;
+}
+
+/* Tríptico "DataOrbit en 1 minuto": al imprimir, la hoja ocupa un A4
+   horizontal sin márgenes y conserva fondos y colores. La página con nombre
+   evita que el formato afecte la impresión del resto del sitio. */
+@page triptico {
+  size: A4 landscape;
+  margin: 0;
+}
+
+@media print {
+  .print-triptico {
+    page: triptico;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .print-triptico * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* Trazo punteado que avanza a lo largo de una conexión SVG */
+@keyframes dashFlow {
+  to { stroke-dashoffset: -32; }
+}
+
+.dash-flow {
+  stroke-dasharray: 6 10;
+  animation: dashFlow 1.2s linear infinite;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
