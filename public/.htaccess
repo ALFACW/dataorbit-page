@@ -25,3 +25,21 @@
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
 </IfModule>
+
+# Seguridad adicional
+# 1. Desactivar listado de directorios
+Options -Indexes
+
+# 2. Bloquear acceso a archivos sensibles y ocultos (.env, .git, .htaccess, respaldos)
+<FilesMatch "^\.|\.(bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|env|zip)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# 3. Cabeceras de seguridad HTTP
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

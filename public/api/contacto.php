@@ -29,14 +29,25 @@ if (!$data) {
     $data = $_POST;
 }
 
-$nombre   = trim($data['nombreCompleto'] ?? $data['name'] ?? '');
-$empresa  = trim($data['empresa'] ?? $data['company'] ?? '');
-$telefono = trim($data['telefono'] ?? $data['phone'] ?? '');
-$correo   = trim($data['correo'] ?? $data['email'] ?? '');
-$asunto   = trim($data['asunto'] ?? $data['subject'] ?? 'Nuevo mensaje desde el sitio web DataOrbit');
+// 1. Protección Honeypot contra bots de spam
+// Si un bot completa este campo oculto (que los humanos no ven), descartamos la solicitud sin error
+$honeypot = trim($data['website_url'] ?? $data['bot_check'] ?? '');
+if (!empty($honeypot)) {
+    // Respuesta simulada exitosa para despistar al bot
+    http_response_code(200);
+    echo json_encode(['success' => true, 'message' => 'Mensaje recibido']);
+    exit;
+}
+
+// 2. Extracción y sanitización estricta contra CRLF Injection (evita que agreguen headers falsos)
+$nombre   = preg_replace("/[\r\n]/", '', trim($data['nombreCompleto'] ?? $data['name'] ?? ''));
+$empresa  = preg_replace("/[\r\n]/", '', trim($data['empresa'] ?? $data['company'] ?? ''));
+$telefono = preg_replace("/[\r\n]/", '', trim($data['telefono'] ?? $data['phone'] ?? ''));
+$correo   = preg_replace("/[\r\n]/", '', trim($data['correo'] ?? $data['email'] ?? ''));
+$asunto   = preg_replace("/[\r\n]/", '', trim($data['asunto'] ?? $data['subject'] ?? 'Nuevo mensaje desde el sitio web DataOrbit'));
 $mensaje  = trim($data['mensaje'] ?? $data['message'] ?? '');
 
-// Validaciones básicas
+// 3. Validaciones básicas
 if (empty($nombre) || empty($empresa) || empty($correo) || empty($mensaje)) {
     http_response_code(400);
     echo json_encode(['success' => false, 'error' => 'Por favor completa todos los campos requeridos.']);
