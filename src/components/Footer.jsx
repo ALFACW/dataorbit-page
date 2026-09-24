@@ -28,7 +28,7 @@ export const Footer = () => {
             </Link>
             
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm font-normal">
-              Impulsamos tu negocio con adopción de inteligencia artificial, agentes conectados, desarrollo de software a medida y analítica estratégica de datos.
+              Preparamos tu empresa para operar con IA: ordenamos sus datos, conectamos sus sistemas y construimos las plataformas que su operación necesita.
             </p>
           </div>
 
@@ -83,11 +83,12 @@ export const Footer = () => {
             {/* Mismos nombres que el catálogo de la sección Soluciones */}
             <ul className="space-y-2 text-xs text-slate-400">
               {[
-                'Diagnóstico de oportunidades',
-                'BI & Ingeniería de Datos',
-                'Automatizaciones e integraciones',
-                'Software a la medida',
-                'Adopción de IA y agentes conectados',
+                'Diagnóstico y hoja de ruta de IA',
+                'Datos listos para IA',
+                'Plataformas a la medida',
+                'Agentes conectados, con resguardos',
+                'Operación continua y adopción',
+                'Impacto medido',
               ].map((name) => (
                 <li key={name}>
                   <a href="/#soluciones" className="flex items-center gap-2 hover:text-white transition">

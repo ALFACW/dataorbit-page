@@ -1,8 +1,10 @@
 import React from 'react';
 import { Navbar } from '../components/Navbar';
 import { Hero } from '../components/Hero';
+import { WhyNow } from '../components/WhyNow';
 import { Solutions } from '../components/Solutions';
-import { Pillars } from '../components/Pillars';
+import { AiInAction } from '../components/AiInAction';
+import { WhatWeBuild } from '../components/WhatWeBuild';
 import { TrustCarousel } from '../components/TrustCarousel';
 import { WhyUs } from '../components/WhyUs';
 import { Contact } from '../components/Contact';
@@ -14,8 +16,10 @@ export const HomePage = () => {
       <Navbar />
       <main>
         <Hero />
+        <WhyNow />
         <Solutions />
-        <Pillars />
+        <AiInAction />
+        <WhatWeBuild />
         <TrustCarousel />
         <WhyUs />
         <Contact />

@@ -1,29 +1,36 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { ChevronDown, ChevronUp, HeartHandshake, Target, Flame, Sparkles } from 'lucide-react';
+import { ChevronDown, ChevronUp, MessagesSquare, Database, ShieldCheck, Gauge, Sparkles } from 'lucide-react';
 
 export const WhyUs = () => {
   const reduceMotion = useReducedMotion();
   const [showFullStory, setShowFullStory] = useState(false);
 
+  // Lo que nos diferencia, contado desde la propuesta: entender, datos, resguardos y medición
   const differentiators = [
     {
-      title: 'Acompañamiento y compromiso',
-      icon: HeartHandshake,
+      title: 'Entendemos tu negocio antes de programar',
+      icon: MessagesSquare,
       description:
-        'Nos involucramos profundamente en cada proyecto, asegurándonos de que nuestras soluciones no solo funcionen, sino que generen un retorno visible para tu empresa.',
+        'Partimos conversando con el equipo. El sistema se diseña sobre cómo se trabaja de verdad, no sobre una plantilla estándar.',
     },
     {
-      title: 'Capacidad de entendimiento y alineación',
-      icon: Target,
+      title: 'Tus datos quedan ordenados y son tuyos',
+      icon: Database,
       description:
-        'Tenemos la habilidad de comprender exactamente lo que quieres y necesitas. Nos alineamos contigo para cumplir tus objetivos y te ayudamos a alinear tus procesos y estrategias con las soluciones más efectivas.',
+        'La base de datos que construimos queda documentada y lista para lo que venga, sea con nosotros o con cualquier otra herramienta.',
     },
     {
-      title: 'Pasión y ambición por solucionar problemas',
-      icon: Flame,
+      title: 'La IA opera con resguardos',
+      icon: ShieldCheck,
       description:
-        'Nuestra pasión por los datos y nuestra ambición por resolver desafíos nos impulsa a encontrar soluciones innovadoras para los problemas más complejos. Estamos dedicados a superar obstáculos y aportar valor real a tu negocio.',
+        'Definimos qué información ve cada agente, qué ejecuta solo y qué requiere la aprobación de una persona.',
+    },
+    {
+      title: 'Medimos el antes y el después',
+      icon: Gauge,
+      description:
+        'Acordamos las métricas al inicio y volvemos a medir al final. Si algo no se puede medir con rigor, lo decimos.',
     },
   ];
 
@@ -93,7 +100,7 @@ export const WhyUs = () => {
             Nos diferenciamos en:
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {differentiators.map((diff, idx) => {
               const Icon = diff.icon;
               return (
@@ -118,7 +125,7 @@ export const WhyUs = () => {
                       <Icon className="w-6 h-6 text-sky-300" />
                     </div>
 
-                    <h4 className="text-xl sm:text-2xl font-bold mb-4 leading-snug">
+                    <h4 className="text-xl font-bold mb-4 leading-snug">
                       {diff.title}
                     </h4>
 

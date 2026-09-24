@@ -3,28 +3,27 @@ import { Link } from 'react-router-dom';
 import {
   ArrowLeft,
   Download,
-  Clock,
-  Sparkles,
-  DollarSign,
+  Database,
+  Plug,
+  Users,
   Compass,
   Layers,
   Gauge,
+  MessagesSquare,
+  ShieldCheck,
   Mail,
   Phone,
   MapPin,
   Globe,
-  HeartHandshake,
-  Target,
-  Flame,
 } from 'lucide-react';
 
 /**
  * DataOrbit en 1 minuto: un tríptico (A4 horizontal, tres paneles) que explica
- * rápido quiénes somos. No lleva logos de clientes (decisión de Vicente); esos
+ * rápido qué hacemos. No lleva logos de clientes (decisión de Vicente); esos
  * viven en el carrusel del home. La misma hoja se ve en pantalla y se imprime como PDF;
  * los estilos `print:` la ajustan exactamente a 297 x 210 mm.
  *
- * Todo el texto sale de lo que ya está publicado en el sitio.
+ * Todo el texto sale del home: misma promesa, mismas etapas y servicios.
  *
  * El PDF descargable (public/dataorbit-en-1-minuto.pdf) se genera desde esta
  * página con `npm run pdf:triptico`, con el servidor de desarrollo corriendo.
@@ -33,53 +32,44 @@ import {
 
 const PDF_PATH = '/dataorbit-en-1-minuto.pdf';
 
-const pillars = [
-  { title: 'Eficiencia', caption: 'Optimización de equipos', icon: Clock },
-  { title: 'Simplicidad', caption: 'Información clara y accesible', icon: Sparkles },
-  { title: 'Rentabilidad', caption: 'Impacto en el margen operativo', icon: DollarSign },
+// Lo que la IA no resuelve sola (sección "Por qué ahora" del home)
+const whyNow = [
+  { title: 'Datos ordenados', caption: 'Sin ellos, la IA se equivoca con total seguridad.', icon: Database },
+  { title: 'Conexión con tus sistemas', caption: 'Sin ella, la IA solo conversa.', icon: Plug },
+  { title: 'Tu equipo a bordo', caption: 'Sin él, la IA queda instalada y nadie la usa.', icon: Users },
 ];
 
+// Las mismas etapas y servicios del catálogo del home
 const stages = [
   {
     num: '01',
     title: 'Entender',
-    caption: 'Dónde se pierde tiempo y margen, y qué conviene hacer primero',
+    caption: 'Cómo trabaja tu equipo de verdad, y qué conviene resolver primero',
     icon: Compass,
-    services: ['Diagnóstico de oportunidades', 'Estrategias digitales de optimización'],
+    services: ['Diagnóstico y hoja de ruta de IA'],
   },
   {
     num: '02',
     title: 'Construir',
-    caption: 'La infraestructura, las herramientas y los modelos que sostienen la operación',
+    caption: 'Los datos ordenados y la plataforma que la operación necesita',
     icon: Layers,
-    services: ['BI & Ingeniería de Datos', 'Automatizaciones e integraciones', 'Software a la medida', 'Modelos predictivos'],
+    services: ['Datos listos para IA', 'Plataformas a la medida'],
   },
   {
     num: '03',
     title: 'Operar y medir',
-    caption: 'Que la IA se use de verdad, y que el impacto quede demostrado',
+    caption: 'Que la IA se use todos los días, y que el impacto quede demostrado',
     icon: Gauge,
-    services: ['Adopción de IA', 'Agentes conectados a tus sistemas', 'Impacto medido'],
+    services: ['Agentes conectados, con resguardos', 'Operación continua y adopción', 'Impacto medido'],
   },
 ];
 
-// Versión corta de "Nos diferenciamos en" (sección ¿Por qué nosotros?)
+// Versión corta de "Nos diferenciamos en" (sección ¿Por qué nosotros? del home)
 const differentiators = [
-  {
-    title: 'Acompañamiento y compromiso',
-    text: 'Nos involucramos en cada proyecto hasta que genere un retorno visible para tu empresa.',
-    icon: HeartHandshake,
-  },
-  {
-    title: 'Entendimiento y alineación',
-    text: 'Comprendemos lo que necesitas y nos alineamos con tus objetivos.',
-    icon: Target,
-  },
-  {
-    title: 'Pasión por solucionar problemas',
-    text: 'Buscamos soluciones para los desafíos más complejos, con valor real para tu negocio.',
-    icon: Flame,
-  },
+  { title: 'Entendemos tu negocio antes de programar', text: 'El sistema se diseña sobre cómo trabaja tu equipo.', icon: MessagesSquare },
+  { title: 'Tus datos quedan ordenados y son tuyos', text: 'Documentados y listos para lo que venga.', icon: Database },
+  { title: 'La IA opera con resguardos', text: 'Qué ve, qué ejecuta sola y qué requiere aprobación.', icon: ShieldCheck },
+  { title: 'Medimos el antes y el después', text: 'Con métricas acordadas desde el inicio.', icon: Gauge },
 ];
 
 const contact = [
@@ -153,24 +143,23 @@ export const TripticoPage = () => {
             <img src="/logos/l_do_blanco_2.svg" alt="DataOrbit" className="h-8 w-auto self-start" />
 
             <div>
-              <PanelTag num="01">Quiénes somos</PanelTag>
-              <h2 className="mt-4 text-2xl font-extrabold leading-tight tracking-tight lg:text-[26px]">
-                Transformamos tus{' '}
-                <span className="bg-gradient-to-r from-blue-400 to-sky-300 bg-clip-text text-transparent">datos</span> en
-                decisiones estratégicas que impulsan tu negocio
+              <PanelTag num="01">Qué hacemos</PanelTag>
+              <h2 className="mt-4 text-2xl font-extrabold leading-tight tracking-tight lg:text-[28px]">
+                Preparamos tu empresa para{' '}
+                <span className="bg-gradient-to-r from-blue-400 to-sky-300 bg-clip-text text-transparent">operar con IA</span>
               </h2>
               <p className="mt-4 text-[13px] leading-relaxed text-slate-400">
-                Combinamos ingeniería de datos, desarrollo a medida e inteligencia artificial para resolver
-                problemas concretos de operación y gestión.
+                Ordenamos tus datos, conectamos tus sistemas y construimos la plataforma que tu operación
+                necesita. Te acompañamos hasta que la IA trabaja en el día a día, y medimos el antes y el después.
               </p>
             </div>
 
             <div className="mt-auto">
-              <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-slate-500">
-                Nuestro impacto se basa en 3 pilares
+              <p className="mb-3 text-[11px] font-bold uppercase leading-snug tracking-widest text-slate-500">
+                La IA ya escribe código. Lo difícil es que funcione en tu empresa. Para eso hace falta:
               </p>
               <ul className="space-y-2.5">
-                {pillars.map(({ title, caption, icon: Icon }) => (
+                {whyNow.map(({ title, caption, icon: Icon }) => (
                   <li key={title} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5">
                     <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg border border-orbit-blue/30 bg-orbit-blue/15 text-orbit-blue-glow">
                       <Icon className="h-4 w-4" />
@@ -189,8 +178,8 @@ export const TripticoPage = () => {
           <section className="relative flex flex-col border-t border-white/10 p-7 lg:border-l lg:border-t-0 lg:p-8 print:border-l print:border-t-0 print:p-[9mm]">
             <PanelTag num="02">Cómo trabajamos</PanelTag>
             <p className="mt-4 text-[13px] leading-relaxed text-slate-400">
-              No son servicios sueltos: un proyecto parte por entender el proceso, construye lo necesario
-              y termina donde empezó, midiendo.
+              Partimos conversando con el equipo, construimos sobre tus datos y nos quedamos hasta que la
+              IA se usa en el día a día.
             </p>
 
             {/* Línea de tiempo: las tres etapas conectadas */}
@@ -247,8 +236,8 @@ export const TripticoPage = () => {
 
             <div className="mt-auto">
               <p className="text-lg font-extrabold leading-tight">
-                ¿Conversamos tu{' '}
-                <span className="bg-gradient-to-r from-blue-400 to-sky-300 bg-clip-text text-transparent">caso</span>?
+                Conversemos{' '}
+                <span className="bg-gradient-to-r from-blue-400 to-sky-300 bg-clip-text text-transparent">20 minutos</span>
               </p>
               <ul className="mt-3 space-y-2">
                 {contact.map(({ icon: Icon, text }) => (

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion';
-import { BarChart3, Code2, Sparkles, Workflow, BrainCircuit, Compass, Gauge, ChevronDown } from 'lucide-react';
+import { BarChart3, Code2, Bot, Workflow, Database, Compass, Gauge, ChevronDown } from 'lucide-react';
 import { useCircuit } from '../hooks/useCycle';
 
 /**
@@ -211,42 +211,42 @@ export const ServiceFlow = ({ className = 'mt-20', onSelectService, onSelectFami
       label: 'Vía de datos',
       steps: [
         {
-          id: 'bi-data',
-          icon: BarChart3,
-          title: 'BI & Ingeniería de Datos',
-          caption: 'Ordenamos y centralizamos',
-          badge: 'Business Intelligence',
-          details: ['Tableros en producción', 'ETL y modelo de datos', 'Trazabilidad y gobierno'],
+          id: 'datos-ia',
+          icon: Database,
+          title: 'Datos unidos y ordenados',
+          caption: 'Una sola fuente confiable',
+          badge: 'Datos listos para IA',
+          details: ['Datos unidos y actualizados', 'Definiciones del negocio', 'Trazabilidad y gobierno'],
         },
         {
-          id: 'predictive',
-          icon: BrainCircuit,
-          title: 'Modelos predictivos',
-          caption: 'Proyectamos lo que viene',
-          badge: 'Machine Learning',
-          details: ['Proyección de demanda y costos', 'Indicadores productivos', 'Escenarios y sensibilidad'],
+          id: 'datos-ia',
+          icon: BarChart3,
+          title: 'Tableros y proyecciones',
+          caption: 'Anticipamos lo que viene',
+          badge: 'Datos listos para IA',
+          details: ['Tableros en producción', 'Proyecciones y escenarios', 'Alertas cuando algo se desvía'],
         },
       ],
     },
     {
-      id: 'software',
-      label: 'Vía de software',
+      id: 'sistemas',
+      label: 'Vía de sistemas',
       steps: [
         {
-          id: 'automatizaciones',
+          id: 'plataformas',
           icon: Workflow,
           title: 'Automatizaciones e integraciones',
           caption: 'Conectamos lo que no se habla',
-          badge: 'Automatización de procesos',
+          badge: 'Plataformas a la medida',
           details: ['Integración entre sistemas', 'Extracción automatizada', 'Reportes programados'],
         },
         {
-          id: 'software-medida',
+          id: 'plataformas',
           icon: Code2,
-          title: 'Software a la medida',
+          title: 'Plataformas a la medida',
           caption: 'Construimos la herramienta',
-          badge: 'Desarrollo de producto',
-          details: ['Ajustado al proceso real', 'Rápido de pivotear', 'Con IA incorporada'],
+          badge: 'Plataformas a la medida',
+          details: ['Ajustado al proceso real', 'Planificación y alertas', 'Con IA incorporada'],
         },
       ],
     },
@@ -260,7 +260,7 @@ export const ServiceFlow = ({ className = 'mt-20', onSelectService, onSelectFami
       <motion.div {...appear()} className="mb-10 text-center">
         <h3 className="text-xl font-bold text-white sm:text-2xl">Cómo se integran</h3>
         <p className="mx-auto mt-2 max-w-xl text-sm text-slate-400 sm:text-base">
-          No son servicios sueltos. Un proyecto parte por entender el proceso, avanza por dos vías
+          No son servicios sueltos. Un proyecto parte conversando con el equipo, avanza por dos vías
           que corren en paralelo, y termina donde empezó: midiendo.
         </p>
         <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
@@ -276,10 +276,10 @@ export const ServiceFlow = ({ className = 'mt-20', onSelectService, onSelectFami
           <motion.div {...appear(0.05)} className="relative mx-auto max-w-sm hover:z-40 focus-within:z-40">
             <EndpointBox
               icon={Compass}
-              title="Diagnóstico de oportunidades"
+              title="Diagnóstico y hoja de ruta"
               tag="Punto de partida"
-              badge="Levantamiento"
-              details={['Levantamiento en terreno', 'Hoja de ruta priorizada', 'Alcance y plazo acotados']}
+              badge="Diagnóstico y hoja de ruta de IA"
+              details={['Conversaciones con el equipo', 'Hoja de ruta priorizada', 'Alcance y plazo acotados']}
               lit={at(STAGE.diag)}
               onSelect={pick('diagnostico')}
             />
@@ -339,7 +339,7 @@ export const ServiceFlow = ({ className = 'mt-20', onSelectService, onSelectFami
           <motion.div {...appear(0.25)} className="relative hover:z-40 focus-within:z-40">
             <div
               tabIndex={0}
-              {...selectable(pick('adopcion-ia'))}
+              {...selectable(pick('agentes'))}
               className={`group relative rounded-xl border px-6 py-5 outline-none transition-all duration-500 ${
                 clickable ? 'cursor-pointer' : 'cursor-default'
               } ${
@@ -355,21 +355,21 @@ export const ServiceFlow = ({ className = 'mt-20', onSelectService, onSelectFami
               />
               <div className="relative flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-center sm:gap-4 sm:text-left">
                 <div className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border transition-all duration-500 ${litIcon(at(STAGE.ia))}`}>
-                  <Sparkles className="h-5 w-5" strokeWidth={2} />
+                  <Bot className="h-5 w-5" strokeWidth={2} />
                 </div>
                 <div>
                   <p className="text-base font-bold text-white sm:text-lg">
-                    Adopción de IA + agentes conectados
+                    Agentes de IA conectados, con resguardos
                   </p>
                   <p className="mt-0.5 text-xs text-slate-300 sm:text-sm">
-                    Atraviesa las dos vías: va incorporada en el software que construimos y en la forma
-                    en que se opera todo lo demás.
+                    Operan sobre las dos vías: les pides algo y lo ejecutan dentro de tus sistemas, con
+                    aprobación de una persona cuando corresponde.
                   </p>
                 </div>
               </div>
               <Details
-                badge="Inteligencia Artificial"
-                items={['Dónde aplicarla y dónde no', 'Agentes conectados vía MCP', 'Con resguardos definidos']}
+                badge="IA que ejecuta"
+                items={['Conectados vía MCP', 'Ejecutan, no solo responden', 'Operación continua y capacitación']}
                 clickable={clickable}
               />
             </div>

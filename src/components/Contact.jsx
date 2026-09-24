@@ -254,7 +254,8 @@ export const Contact = () => {
               Contacto
             </h2>
             <p className="text-lg text-slate-300 font-medium leading-relaxed mb-8">
-              Llena el formulario a continuación y nos pondremos en contacto contigo lo antes posible.
+              Cuéntanos cómo trabaja tu equipo y coordinamos una conversación de 20 minutos para ver
+              qué conviene resolver primero.
               <br />
               <strong className="text-white">¡Esperamos saber de ti!</strong>
             </p>

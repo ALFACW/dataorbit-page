@@ -1,117 +1,80 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import {
-  BarChart3,
-  Code2,
-  Sparkles,
-  Workflow,
-  BrainCircuit,
-  Route,
-  Compass,
-  Bot,
-  Gauge,
-  Layers,
-} from 'lucide-react';
+import { Compass, Database, Code2, Bot, LifeBuoy, Gauge, Layers } from 'lucide-react';
 import { ServiceFlow } from './ServiceFlow';
 
 export const Solutions = () => {
   const reduceMotion = useReducedMotion();
 
   /**
-   * El catálogo se agrupa en el mismo orden en que avanza un proyecto:
-   * primero se entiende, después se construye, y al final se opera y se mide.
+   * El catálogo se agrupa en el mismo orden en que avanza un proyecto y en las
+   * mismas etapas del mapa de ServiceFlow: primero se entiende, después se
+   * construye, y al final se opera con IA y se mide.
    */
   const families = [
     {
       id: 'entender',
       label: 'Entender',
-      caption: 'Dónde se pierde tiempo y margen, y qué conviene hacer primero',
+      caption: 'Cómo trabaja tu equipo de verdad, y qué conviene resolver primero',
       services: [
         {
           id: 'diagnostico',
-          title: 'Diagnóstico de oportunidades',
+          title: 'Diagnóstico y hoja de ruta de IA',
           icon: Compass,
           badge: 'Punto de partida',
           description:
-            'Un trabajo acotado antes de comprometer un proyecto grande. Levantamos el proceso junto a las personas que lo ejecutan, identificamos dónde se pierde tiempo y margen, y entregamos una hoja de ruta priorizada por impacto. Al terminar sabes qué conviene hacer primero y qué puede esperar.',
-          highlights: ['Levantamiento en terreno', 'Hoja de ruta priorizada', 'Alcance y plazo acotados'],
-        },
-        {
-          id: 'estrategia-digital',
-          title: 'Estrategias digitales de optimización',
-          icon: Route,
-          badge: 'Acompañamiento',
-          description:
-            'Después del diagnóstico quedamos como contraparte técnica del negocio: acompañamos la ejecución de la hoja de ruta, revisamos lo implementado y ajustamos prioridades cuando el negocio cambia. Es la relación larga, no el proyecto puntual.',
-          highlights: ['Contraparte técnica', 'Acompañamiento continuo', 'Revisión de prioridades'],
+            'Antes de construir nada, conversamos con el equipo: primero en conjunto, para entender el proceso completo, y después con cada persona, para ver lo que en grupo no aparece. Con eso priorizamos qué conviene resolver primero y entregamos una hoja de ruta por impacto, con alcance y plazo acotados.',
+          highlights: ['Conversaciones con el equipo', 'Hoja de ruta priorizada', 'Alcance y plazo acotados'],
         },
       ],
     },
     {
       id: 'construir',
       label: 'Construir',
-      caption: 'La infraestructura, las herramientas y los modelos que sostienen la operación',
+      caption: 'Los datos ordenados y la plataforma que la operación necesita',
       services: [
         {
-          id: 'bi-data',
-          title: 'BI & Ingeniería de Datos',
-          icon: BarChart3,
-          badge: 'Business Intelligence',
+          id: 'datos-ia',
+          title: 'Datos listos para IA',
+          icon: Database,
+          badge: 'Ingeniería de datos y BI',
           description:
-            'Centralizamos y estructuramos la información que hoy vive dispersa entre planillas y sistemas distintos. Modelamos los datos, construimos el flujo que los mantiene actualizados y los dejamos en tableros que el equipo puede leer sin intermediarios.',
-          highlights: ['Tableros en producción', 'ETL y modelo de datos', 'Trazabilidad y gobierno'],
+            'Unimos la información que hoy vive en planillas, sistemas y plataformas externas en un modelo de datos confiable, que se actualiza solo y tiene escritas las definiciones del negocio. Sobre esa base funcionan los tableros, las proyecciones y cualquier IA que venga después. También deja claro qué datos personales existen y quién accede a ellos, un paso necesario frente a la nueva Ley 21.719 de protección de datos personales.',
+          highlights: ['Datos unidos y actualizados', 'Tableros y proyecciones', 'Trazabilidad y gobierno'],
         },
         {
-          id: 'automatizaciones',
-          title: 'Automatizaciones e integraciones',
-          icon: Workflow,
-          badge: 'Automatización de procesos',
-          description:
-            'Sistemas que no se hablan entre sí, datos que alguien copia a mano de un portal a una planilla, reportes que se rehacen todos los meses. Conectamos las piezas y dejamos ese trabajo corriendo solo.',
-          highlights: ['Integración entre sistemas', 'Extracción automatizada', 'Reportes programados'],
-        },
-        {
-          id: 'software-medida',
-          title: 'Software a la medida',
+          id: 'plataformas',
+          title: 'Plataformas a la medida',
           icon: Code2,
-          badge: 'Desarrollo de producto',
+          badge: 'Software y automatización',
           description:
-            'Construir software propio dejó de ser caro y lento. Hoy desarrollamos plataformas ajustadas exactamente al proceso de la empresa, en menos tiempo y a menor costo que antes, con margen para pivotear cuando el negocio cambia. Cada plataforma se entrega con IA incorporada, lo que hace mucho más rápido operarla y mantenerla.',
-          highlights: ['Ajustado al proceso real', 'Rápido de pivotear', 'Con IA incorporada'],
-        },
-        {
-          id: 'predictive',
-          title: 'Modelos predictivos',
-          icon: BrainCircuit,
-          badge: 'Machine Learning',
-          description:
-            'Analizamos el historial de la operación para proyectar lo que viene: demanda, costos, resultados productivos o financieros. Modelos construidos sobre los indicadores que el negocio ya usa para decidir.',
-          highlights: ['Proyección de demanda y costos', 'Indicadores productivos', 'Escenarios y sensibilidad'],
+            'Construimos el sistema que la operación necesita, ajustado a su proceso: planificación, proyecciones, alertas y automatizaciones en un mismo lugar, conectado con los sistemas que ya existen. Construir software propio dejó de ser caro y lento; lo que marca la diferencia es que calce con cómo trabaja tu equipo.',
+          highlights: ['Ajustado al proceso real', 'Automatizaciones e integraciones', 'Con IA incorporada'],
         },
       ],
     },
     {
       id: 'operar',
       label: 'Operar y medir',
-      caption: 'Que la IA se use de verdad, y que el impacto quede demostrado',
+      caption: 'Que la IA se use todos los días, y que el impacto quede demostrado',
       services: [
         {
-          id: 'adopcion-ia',
-          title: 'Adopción de IA',
-          icon: Sparkles,
-          badge: 'Inteligencia Artificial',
+          id: 'agentes',
+          title: 'Agentes conectados, con resguardos',
+          icon: Bot,
+          badge: 'IA que ejecuta',
           description:
-            'La inteligencia artificial deja de ser una promesa cuando se conecta a los datos reales de la empresa. Definimos dónde aplicarla y dónde no, con qué resguardos y con qué capacitación. El trabajo es que efectivamente se use en el día a día, no que quede instalada y nadie la toque.',
-          highlights: ['Dónde aplicarla y dónde no', 'Capacitación del equipo', 'Adopción real, no piloto'],
+            'No un chatbot que conversa, sino agentes con acceso real a los sistemas de la empresa mediante MCP: les pides algo y lo ejecutan, leyendo la información que ya existe y devolviendo trabajo hecho. Cada agente se entrega con resguardos definidos: a qué datos accede, qué ejecuta solo y qué requiere aprobación de una persona.',
+          highlights: ['Conectados vía MCP', 'Ejecutan, no solo responden', 'Aprobación humana cuando corresponde'],
         },
         {
-          id: 'agentes',
-          title: 'Agentes conectados a tus sistemas',
-          icon: Bot,
-          badge: 'Agentes con MCP',
+          id: 'operacion',
+          title: 'Operación continua y adopción',
+          icon: LifeBuoy,
+          badge: 'Acompañamiento',
           description:
-            'No un chatbot que conversa, sino agentes con acceso real a los sistemas de la empresa mediante MCP: leen la información que ya existe, ejecutan tareas y devuelven trabajo hecho. Cada agente se entrega con resguardos definidos — a qué datos accede, qué ejecuta solo y qué requiere aprobación humana.',
-          highlights: ['Conectados vía MCP', 'Ejecutan, no solo responden', 'Con resguardos definidos'],
+            'La IA deja de ser una promesa cuando el equipo la usa todos los días. Por eso nos quedamos después de la entrega: monitoreamos lo que construimos, capacitamos al equipo y ajustamos cuando el negocio cambia. Es la relación larga, no el proyecto puntual.',
+          highlights: ['Monitoreo de lo entregado', 'Capacitación del equipo', 'Mejora continua'],
         },
         {
           id: 'impacto',
@@ -205,8 +168,8 @@ export const Solutions = () => {
           </h2>
 
           <p className="mt-5 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            Combinamos ingeniería de datos, desarrollo a medida e inteligencia artificial para
-            resolver problemas concretos de operación y gestión.
+            Partimos entendiendo cómo trabaja tu equipo, construimos sobre tus datos y nos quedamos
+            hasta que la IA se usa en el día a día.
           </p>
         </div>
 
