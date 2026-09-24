@@ -1,0 +1,45 @@
+# DataOrbit - Redirecciones 301, HTTPS, www canónico y SPA routing
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Forzar HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://dataorbit.cl/$1 [R=301,L]
+
+  # Forzar www a sin-www (versión canónica única)
+  RewriteCond %{HTTP_HOST} ^www\.dataorbit\.cl$ [NC]
+  RewriteRule ^(.*)$ https://dataorbit.cl/$1 [R=301,L]
+
+  # Redirecciones 301 de WordPress antiguo a rutas de DataOrbit
+  RewriteRule ^eduorbit-360/?$ / [R=301,L]
+  RewriteRule ^servicios/?$ /#soluciones [R=301,NE,L]
+  RewriteRule ^contacto/?$ /#contacto [R=301,NE,L]
+  RewriteRule ^feed/?$ / [R=301,L]
+  RewriteRule ^comments/feed/?$ / [R=301,L]
+  RewriteRule ^wp-login\.php$ / [R=301,L]
+  RewriteRule ^xmlrpc\.php$ / [R=301,L]
+
+  # SPA Fallback para React/Vite
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+
+# Seguridad adicional
+# 1. Desactivar listado de directorios
+Options -Indexes
+
+# 2. Bloquear acceso a archivos sensibles y ocultos (.env, .git, .htaccess, respaldos)
+<FilesMatch "^\.|\.(bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|env|zip)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# 3. Cabeceras de seguridad HTTP
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

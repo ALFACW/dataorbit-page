@@ -8,6 +8,7 @@ export const HeroCanvas = () => {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let animationFrameId;
+    let isVisible = true;
 
     let width = (canvas.width = canvas.parentElement.offsetWidth);
     let height = (canvas.height = canvas.parentElement.offsetHeight);
@@ -39,29 +40,49 @@ export const HeroCanvas = () => {
     };
 
     const parent = canvas.parentElement;
-    parent.addEventListener('mousemove', handleMouseMove);
-    parent.addEventListener('mouseleave', handleMouseLeave);
+    if (parent) {
+      parent.addEventListener('mousemove', handleMouseMove);
+      parent.addEventListener('mouseleave', handleMouseLeave);
+    }
 
     // Particle nodes setup
-    const numParticles = Math.min(Math.floor((width * height) / 12000), 75);
+    const numParticles = Math.min(Math.floor((width * height) / 14000), 65);
     const particles = [];
 
-    const colors = ['#3B82F6', '#60A5FA', '#818CF8', '#A7F3D0', '#93C5FD'];
+    const colors = ['#3B82F6', '#60A5FA', '#818CF8', '#93C5FD'];
 
     for (let i = 0; i < numParticles; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.7,
-        vy: (Math.random() - 0.5) * 0.7,
-        radius: Math.random() * 2 + 1.2,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        radius: Math.random() * 1.8 + 1.2,
         color: colors[Math.floor(Math.random() * colors.length)],
-        alpha: Math.random() * 0.7 + 0.3,
-        pulseSpeed: Math.random() * 0.02 + 0.005,
+        alpha: Math.random() * 0.6 + 0.3,
+        pulseSpeed: Math.random() * 0.015 + 0.005,
       });
     }
 
+    const startAnimation = () => {
+      if (!animationFrameId) {
+        animate();
+      }
+    };
+
+    const stopAnimation = () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
+    };
+
     const animate = () => {
+      if (!isVisible) {
+        animationFrameId = null;
+        return;
+      }
+
       ctx.clearRect(0, 0, width, height);
 
       // Render synaptic connection lines
@@ -71,19 +92,19 @@ export const HeroCanvas = () => {
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 130) {
-            const alpha = (1 - dist / 130) * 0.25;
+          if (dist < 120) {
+            const alpha = (1 - dist / 120) * 0.22;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.strokeStyle = `rgba(59, 130, 246, ${alpha})`;
-            ctx.lineWidth = 0.8;
+            ctx.lineWidth = 0.75;
             ctx.stroke();
           }
         }
       }
 
-      // Update & render particles
+      // Update & render particles (sin shadowBlur para evitar cuello de botella de rendimiento)
       particles.forEach((p) => {
         p.x += p.vx;
         p.y += p.vy;
@@ -108,32 +129,58 @@ export const HeroCanvas = () => {
 
         // Pulse alpha
         p.alpha += p.pulseSpeed;
-        if (p.alpha > 0.9 || p.alpha < 0.2) p.pulseSpeed *= -1;
+        if (p.alpha > 0.85 || p.alpha < 0.25) p.pulseSpeed *= -1;
 
         // Draw particle node
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
         ctx.globalAlpha = p.alpha;
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = p.color;
         ctx.fill();
-        ctx.shadowBlur = 0;
         ctx.globalAlpha = 1.0;
       });
 
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    animate();
+    // IntersectionObserver to pause loop when scrolled out of view
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          startAnimation();
+        } else {
+          stopAnimation();
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    if (canvas) observer.observe(canvas);
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        isVisible = false;
+        stopAnimation();
+      } else {
+        isVisible = true;
+        startAnimation();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    startAnimation();
 
     return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('resize', handleResize);
       if (parent) {
         parent.removeEventListener('mousemove', handleMouseMove);
         parent.removeEventListener('mouseleave', handleMouseLeave);
       }
-      cancelAnimationFrame(animationFrameId);
+      stopAnimation();
     };
   }, []);
 
