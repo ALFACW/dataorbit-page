@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { TrendingUp, Handshake, Package, GraduationCap, ArrowRight } from 'lucide-react';
 
 // Tipos de sistemas, sin nombrar clientes ni proyectos en curso
@@ -28,58 +28,12 @@ const systems = [
   },
 ];
 
-// Casos publicados en dataorbit.cl, con su formato Desafío / Solución y resultados
-const cases = [
-  {
-    id: 'ahv',
-    client: 'AHV',
-    logo: '/logos/clients/ahv-blanco-2.png',
-    title: 'Impulsando la eficiencia en la salmonicultura',
-    challenge:
-      'Demostrar con precisión cómo sus productos elevan la eficiencia productiva en la salmonicultura, generando ventajas competitivas reales en la industria.',
-    solution:
-      'Modelo predictivo avanzado que evidencia, con datos en tiempo real, cómo sus productos mejoran indicadores clave como FCR, Kg/Smolt e ICA. Herramienta interactiva que permitió mostrar a sus clientes, con transparencia, incrementos directos en rentabilidad.',
-  },
-  {
-    id: 'iz',
-    client: 'IZ',
-    logo: '/logos/clients/iz-blanco.png',
-    title: 'Automatización en contabilidad',
-    challenge:
-      'Optimizar el proceso manual y repetitivo de elaboración de formularios 29 (declaración de IVA) para numerosos clientes.',
-    solution:
-      'Solución automatizada con scraping, integrada con el Servicio de Impuestos Internos. Descarga automatizada y registro contable inmediato, estandarizado y sin errores.',
-  },
-  {
-    id: 'huiro',
-    client: 'Huiro',
-    logo: '/logos/clients/huiro-blanco.png',
-    title: 'Optimización del flujo de caja',
-    challenge:
-      'Contar con una herramienta ágil para gestionar el flujo de caja desde la cartola bancaria y proyectar las finanzas del negocio.',
-    solution:
-      'Plataforma semiautomatizada que clasifica movimientos bancarios y los asocia a centros de costo. Dashboards BI para anticipar proyecciones basadas en cuentas por cobrar, pagar y presupuestos.',
-  },
-  {
-    id: 'protectora',
-    client: 'La Protectora',
-    logo: '/logos/clients/la-protectora-blanco-2.png',
-    title: 'Transformación digital en educación',
-    challenge:
-      'Centralizar información dispersa en múltiples plataformas y transformar la gestión educativa mediante una cultura de datos.',
-    solution:
-      'Dashboard integral que consolidó matrícula, asistencia y desempeño académico en una sola plataforma.',
-  },
-];
-
 /**
- * Lo que construimos: los tipos de sistemas que hacemos y, debajo, los casos
- * reales publicados. Los casos se eligen con el cursor (o tocando, en móvil).
+ * Lo que construimos: ejemplos de las plataformas a la medida que hacemos,
+ * descritos por tipo de sistema, sin nombrar clientes ni proyectos en curso.
  */
 export const WhatWeBuild = () => {
   const reduceMotion = useReducedMotion();
-  const [active, setActive] = useState(0);
-  const current = cases[active];
 
   return (
     <section id="lo-que-construimos" className="relative overflow-hidden border-t border-white/5 bg-[#070A12] px-4 py-24 text-white sm:px-6 lg:px-8">
@@ -96,6 +50,9 @@ export const WhatWeBuild = () => {
               planifican y operan
             </span>
           </h2>
+          <p className="mt-4 text-sm text-slate-400 sm:text-base">
+            Ejemplos de plataformas a la medida que construimos sobre los datos de cada empresa.
+          </p>
         </div>
 
         {/* Tipos de sistemas */}
@@ -124,63 +81,6 @@ export const WhatWeBuild = () => {
           ))}
         </div>
 
-        {/* Casos reales */}
-        <div className="mt-20">
-          <div className="mb-8 flex items-center gap-4">
-            <span className="h-px flex-1 bg-gradient-to-r from-transparent to-white/15" />
-            <h3 className="text-xl font-bold sm:text-2xl">Casos reales</h3>
-            <span className="h-px flex-1 bg-gradient-to-l from-transparent to-white/15" />
-          </div>
-
-          <div role="tablist" aria-label="Casos" className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {cases.map((c, i) => {
-              const isActive = i === active;
-              return (
-                <button
-                  key={c.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  onMouseEnter={() => setActive(i)}
-                  onFocus={() => setActive(i)}
-                  onClick={() => setActive(i)}
-                  className={`flex h-20 items-center justify-center rounded-2xl border px-4 transition-all duration-300 ${
-                    isActive
-                      ? 'border-orbit-blue-glow/60 bg-orbit-blue/15 shadow-[0_0_30px_-8px_rgba(96,165,250,0.7)]'
-                      : 'border-white/10 bg-white/[0.02] opacity-60 hover:opacity-100'
-                  }`}
-                >
-                  <img src={c.logo} alt={c.client} className="max-h-10 w-auto max-w-full object-contain" />
-                </button>
-              );
-            })}
-          </div>
-
-          <div role="tabpanel" className="mt-4 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#101a2e] to-[#0B1222] p-6 sm:p-8">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={current.id}
-                initial={reduceMotion ? false : { opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={reduceMotion ? undefined : { opacity: 0, y: -10 }}
-                transition={{ duration: 0.25 }}
-              >
-                <p className="text-[11px] font-bold uppercase tracking-widest text-orbit-blue-glow">{current.client}</p>
-                <h4 className="mt-1 text-xl font-extrabold sm:text-2xl">{current.title}</h4>
-                <div className="mt-6 grid gap-4 md:grid-cols-2">
-                  <div className="rounded-2xl border border-amber-400/20 bg-amber-500/[0.05] p-5">
-                    <p className="mb-2 text-xs font-bold uppercase tracking-wider text-amber-300">Desafío</p>
-                    <p className="text-sm leading-relaxed text-slate-300">{current.challenge}</p>
-                  </div>
-                  <div className="rounded-2xl border border-emerald-400/20 bg-emerald-500/[0.05] p-5">
-                    <p className="mb-2 text-xs font-bold uppercase tracking-wider text-emerald-300">Solución y resultados</p>
-                    <p className="text-sm leading-relaxed text-slate-300">{current.solution}</p>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
       </div>
     </section>
   );

@@ -30,7 +30,7 @@ export const WhyUs = () => {
       title: 'Medimos el antes y el después',
       icon: Gauge,
       description:
-        'Acordamos las métricas al inicio y volvemos a medir al final. Si algo no se puede medir con rigor, lo decimos.',
+        'Acordamos las métricas al inicio, volvemos a medir al final y respondemos por el resultado. Si algo no se puede medir con rigor, lo decimos.',
     },
   ];
 

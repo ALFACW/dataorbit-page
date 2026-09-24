@@ -44,7 +44,8 @@ export const Hero = () => {
           className="mt-6 text-base sm:text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal"
         >
           Ordenamos tus datos, conectamos tus sistemas y construimos la plataforma que tu operación
-          necesita. Te acompañamos hasta que la IA trabaja en el día a día, y medimos el antes y el después.
+          necesita. Te acompañamos hasta que la IA trabaja en el día a día, medimos el antes y el después,
+          y respondemos por el resultado.
         </motion.p>
 
         {/* Action Buttons */}

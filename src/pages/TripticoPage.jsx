@@ -69,7 +69,7 @@ const differentiators = [
   { title: 'Entendemos tu negocio antes de programar', text: 'El sistema se diseña sobre cómo trabaja tu equipo.', icon: MessagesSquare },
   { title: 'Tus datos quedan ordenados y son tuyos', text: 'Documentados y listos para lo que venga.', icon: Database },
   { title: 'La IA opera con resguardos', text: 'Qué ve, qué ejecuta sola y qué requiere aprobación.', icon: ShieldCheck },
-  { title: 'Medimos el antes y el después', text: 'Con métricas acordadas desde el inicio.', icon: Gauge },
+  { title: 'Medimos el antes y el después', text: 'Con métricas acordadas, y respondemos por el resultado.', icon: Gauge },
 ];
 
 const contact = [
@@ -150,7 +150,8 @@ export const TripticoPage = () => {
               </h2>
               <p className="mt-4 text-[13px] leading-relaxed text-slate-400">
                 Ordenamos tus datos, conectamos tus sistemas y construimos la plataforma que tu operación
-                necesita. Te acompañamos hasta que la IA trabaja en el día a día, y medimos el antes y el después.
+                necesita. Te acompañamos hasta que la IA trabaja en el día a día, medimos el antes y el después,
+                y respondemos por el resultado.
               </p>
             </div>
 
