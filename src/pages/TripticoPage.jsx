@@ -13,11 +13,15 @@ import {
   Phone,
   MapPin,
   Globe,
+  HeartHandshake,
+  Target,
+  Flame,
 } from 'lucide-react';
 
 /**
  * DataOrbit en 1 minuto: un tríptico (A4 horizontal, tres paneles) que explica
- * rápido quiénes somos. La misma hoja se ve en pantalla y se imprime como PDF;
+ * rápido quiénes somos. No lleva logos de clientes (decisión de Vicente); esos
+ * viven en el carrusel del home. La misma hoja se ve en pantalla y se imprime como PDF;
  * los estilos `print:` la ajustan exactamente a 297 x 210 mm.
  *
  * Todo el texto sale de lo que ya está publicado en el sitio.
@@ -59,12 +63,23 @@ const stages = [
   },
 ];
 
-const clients = [
-  { name: 'MOWI CHILE', logo: '/logos/clients/mowi-blanco.png' },
-  { name: 'AHV ® INTERNATIONAL', logo: '/logos/clients/ahv-blanco-2.png' },
-  { name: 'LA PROTECTORA DE LA INFANCIA', logo: '/logos/clients/la-protectora-blanco-2.png' },
-  { name: 'IVÁN ZAPATA SERVICIOS CONTABLES', logo: '/logos/clients/iz-blanco.png' },
-  { name: 'HUIRO AGRICULTURA OCEÁNICA', logo: '/logos/clients/huiro-blanco.png' },
+// Versión corta de "Nos diferenciamos en" (sección ¿Por qué nosotros?)
+const differentiators = [
+  {
+    title: 'Acompañamiento y compromiso',
+    text: 'Nos involucramos en cada proyecto hasta que genere un retorno visible para tu empresa.',
+    icon: HeartHandshake,
+  },
+  {
+    title: 'Entendimiento y alineación',
+    text: 'Comprendemos lo que necesitas y nos alineamos con tus objetivos.',
+    icon: Target,
+  },
+  {
+    title: 'Pasión por solucionar problemas',
+    text: 'Buscamos soluciones para los desafíos más complejos, con valor real para tu negocio.',
+    icon: Flame,
+  },
 ];
 
 const contact = [
@@ -203,14 +218,20 @@ export const TripticoPage = () => {
             </ol>
           </section>
 
-          {/* Panel 3: con quién trabajamos, EduOrbit y contacto */}
+          {/* Panel 3: por qué nosotros, EduOrbit y contacto */}
           <section className="relative flex flex-col gap-6 border-t border-white/10 p-7 lg:border-l lg:border-t-0 lg:p-8 print:border-l print:border-t-0 print:p-[9mm]">
             <div>
-              <PanelTag num="03">Quiénes confían en nosotros</PanelTag>
-              <ul className="mt-4 grid grid-cols-2 gap-2.5">
-                {clients.map((c) => (
-                  <li key={c.name} className="flex h-16 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] px-3">
-                    <img src={c.logo} alt={c.name} className="max-h-11 w-auto max-w-full object-contain" />
+              <PanelTag num="03">Por qué nosotros</PanelTag>
+              <ul className="mt-4 space-y-3">
+                {differentiators.map(({ title, text, icon: Icon }) => (
+                  <li key={title} className="flex gap-3">
+                    <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg border border-orbit-blue/30 bg-orbit-blue/15 text-sky-300">
+                      <Icon className="h-4 w-4" />
+                    </span>
+                    <span>
+                      <span className="block text-sm font-bold leading-tight">{title}</span>
+                      <span className="mt-0.5 block text-[11.5px] leading-snug text-slate-400">{text}</span>
+                    </span>
                   </li>
                 ))}
               </ul>

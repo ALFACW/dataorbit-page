@@ -6,6 +6,8 @@ const clientLogos = [
   { name: 'LA PROTECTORA DE LA INFANCIA', logoUrl: '/logos/clients/la-protectora-blanco-2.png' },
   { name: 'IVÁN ZAPATA SERVICIOS CONTABLES', logoUrl: '/logos/clients/iz-blanco.png' },
   { name: 'HUIRO AGRICULTURA OCEÁNICA', logoUrl: '/logos/clients/huiro-blanco.png' },
+  { name: 'FEDUCA · FUNDACIÓN EDUCACIONAL COMUNIDAD Y APRENDIZAJE', logoUrl: '/logos/clients/feduca-blanco.png' },
+  { name: 'SALMONES DE CHILE', logoUrl: '/logos/clients/salmones-de-chile-blanco.png' },
 ];
 
 export const TrustCarousel = () => {
@@ -41,11 +43,13 @@ export const TrustCarousel = () => {
           <div className="absolute inset-y-0 left-0 w-24 sm:w-36 bg-gradient-to-r from-slate-900/95 to-transparent z-10 pointer-events-none" />
           <div className="absolute inset-y-0 right-0 w-24 sm:w-36 bg-gradient-to-l from-slate-900/95 to-transparent z-10 pointer-events-none" />
 
-          <div className="flex w-[200%] animate-marquee items-center gap-16 sm:gap-28">
+          {/* La fila mide lo que su contenido (w-max) y el espacio va como margen de cada logo:
+              así las dos copias miden exactamente lo mismo y desplazar -50% empalma sin salto */}
+          <div className="flex w-max animate-marquee items-center [animation-duration:40s]">
             {[...clientLogos, ...clientLogos].map((client, idx) => (
               <div
                 key={idx}
-                className="flex items-center justify-center flex-shrink-0 px-4 group transition-all duration-300"
+                className="mr-16 sm:mr-28 flex items-center justify-center flex-shrink-0 px-4 group transition-all duration-300"
               >
                 <img
                   src={client.logoUrl}
