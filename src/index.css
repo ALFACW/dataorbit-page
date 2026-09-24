@@ -8,6 +8,16 @@
   }
 }
 
+/* Respeto a accesibilidad de reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Glassmorphism utilities */
 .glass-panel {
   background: rgba(15, 22, 38, 0.75);
@@ -41,6 +51,22 @@
 
 .glow-text {
   text-shadow: 0 0 20px rgba(96, 165, 250, 0.6);
+}
+
+/* Shimmer & Tech Glow Animation */
+@keyframes techPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.03);
+  }
+}
+
+.tech-pulse {
+  animation: techPulse 3.5s ease-in-out infinite;
 }
 
 /* Custom Scrollbar */

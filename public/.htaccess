@@ -1,0 +1,27 @@
+# DataOrbit - Redirecciones 301, HTTPS, www canónico y SPA routing
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Forzar HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://dataorbit.cl/$1 [R=301,L]
+
+  # Forzar www a sin-www (versión canónica única)
+  RewriteCond %{HTTP_HOST} ^www\.dataorbit\.cl$ [NC]
+  RewriteRule ^(.*)$ https://dataorbit.cl/$1 [R=301,L]
+
+  # Redirecciones 301 de WordPress antiguo a rutas de DataOrbit
+  RewriteRule ^eduorbit-360/?$ / [R=301,L]
+  RewriteRule ^servicios/?$ /#soluciones [R=301,NE,L]
+  RewriteRule ^contacto/?$ /#contacto [R=301,NE,L]
+  RewriteRule ^feed/?$ / [R=301,L]
+  RewriteRule ^comments/feed/?$ / [R=301,L]
+  RewriteRule ^wp-login\.php$ / [R=301,L]
+  RewriteRule ^xmlrpc\.php$ / [R=301,L]
+
+  # SPA Fallback para React/Vite
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>

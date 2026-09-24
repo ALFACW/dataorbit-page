@@ -18,13 +18,54 @@ export const Contact = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const [error, setError] = useState(null);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
+    setError(null);
+
+    const payload = {
+      nombreCompleto: formData.nombreCompleto,
+      empresa: formData.empresa,
+      telefono: formData.telefono,
+      correo: formData.correo,
+      asunto: formData.asunto,
+      mensaje: formData.mensaje,
+    };
+
+    try {
+      const response = await fetch('/api/contacto.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const contentType = response.headers.get('content-type');
+      if (response.ok && contentType && contentType.includes('application/json')) {
+        const data = await response.json();
+        if (data.success) {
+          setSubmitted(true);
+          return;
+        } else {
+          setError(data.error || 'No se pudo enviar el mensaje.');
+        }
+      } else {
+        // En caso de respuesta sin JSON
+        if (response.ok) {
+          setSubmitted(true);
+        } else {
+          setError('Error en el servidor al enviar el mensaje. Inténtalo de nuevo.');
+        }
+      }
+    } catch {
+      setError('Error de conexión. Puedes contactarnos directamente a contacto@dataorbit.cl o al +56 9 8452 1190');
+    } finally {
       setLoading(false);
-      setSubmitted(true);
-    }, 1200);
+    }
   };
 
   return (
@@ -183,7 +224,7 @@ export const Contact = () => {
                     className="w-full sm:w-auto px-10 py-3.5 rounded-full bg-[#3B59C8] hover:bg-[#2F49B0] text-white font-extrabold text-base shadow-lg shadow-blue-600/30 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50"
                   >
                     {loading ? (
-                      <span>Procesando...</span>
+                      <span>Enviando...</span>
                     ) : (
                       <>
                         <span>Enviar</span>
@@ -191,6 +232,9 @@ export const Contact = () => {
                       </>
                     )}
                   </button>
+                  {error && (
+                    <p className="mt-3 text-sm text-red-600 font-semibold">{error}</p>
+                  )}
                 </div>
 
               </form>
