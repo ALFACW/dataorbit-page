@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUp, Linkedin, Twitter, Github, ShieldCheck } from 'lucide-react';
+import { ArrowUp, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const Footer = () => {
@@ -28,32 +28,8 @@ export const Footer = () => {
             </Link>
             
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm font-normal">
-              Impulsamos empresas con analítica avanzada, automatización financiera y modelos predictivos. Convierte tus datos en decisiones estratégicas con la tecnología líder de DataOrbit.
+              Impulsamos tu negocio con adopción de inteligencia artificial, agentes conectados, desarrollo de software a medida y analítica estratégica de datos.
             </p>
-
-            <div className="mt-6 flex items-center gap-3">
-              <a
-                href="#"
-                className="w-9 h-9 rounded-full bg-slate-800/80 border border-slate-700/60 flex items-center justify-center text-slate-300 hover:text-white hover:bg-orbit-blue transition"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
-                className="w-9 h-9 rounded-full bg-slate-800/80 border border-slate-700/60 flex items-center justify-center text-slate-300 hover:text-white hover:bg-orbit-blue transition"
-                aria-label="Twitter"
-              >
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
-                className="w-9 h-9 rounded-full bg-slate-800/80 border border-slate-700/60 flex items-center justify-center text-slate-300 hover:text-white hover:bg-orbit-blue transition"
-                aria-label="GitHub"
-              >
-                <Github className="w-4 h-4" />
-              </a>
-            </div>
           </div>
 
           {/* Col 2: Navigation Links */}
@@ -73,14 +49,19 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/#casos-exito" className="hover:text-white transition">
-                  Casos de Éxito
+                <a href="/#quienes-confian" className="hover:text-white transition">
+                  Quiénes confían en nosotros
                 </a>
               </li>
               <li>
                 <a href="/#contacto" className="hover:text-white transition">
-                  Contacto & Asesoría
+                  Contacto
                 </a>
+              </li>
+              <li>
+                <Link to="/en-1-minuto" className="hover:text-white transition">
+                  DataOrbit en 1 minuto
+                </Link>
               </li>
               <li>
                 <Link
@@ -99,23 +80,22 @@ export const Footer = () => {
             <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4">
               Soluciones Clave
             </h4>
+            {/* Mismos nombres que el catálogo de la sección Soluciones */}
             <ul className="space-y-2 text-xs text-slate-400">
-              <li className="flex items-center gap-2">
-                <ShieldCheck className="w-3.5 h-3.5 text-orbit-blue" />
-                <span>Business Intelligence & Data Warehousing</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <ShieldCheck className="w-3.5 h-3.5 text-orbit-blue" />
-                <span>Automatización de Flujo de Caja & Finanzas</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <ShieldCheck className="w-3.5 h-3.5 text-orbit-blue" />
-                <span>Modelos Predictivos & Machine Learning</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <ShieldCheck className="w-3.5 h-3.5 text-orbit-blue" />
-                <span>Partnership Operativo & Consultoría</span>
-              </li>
+              {[
+                'Diagnóstico de oportunidades',
+                'BI & Ingeniería de Datos',
+                'Automatizaciones e integraciones',
+                'Software a la medida',
+                'Adopción de IA y agentes conectados',
+              ].map((name) => (
+                <li key={name}>
+                  <a href="/#soluciones" className="flex items-center gap-2 hover:text-white transition">
+                    <ShieldCheck className="w-3.5 h-3.5 text-orbit-blue" />
+                    <span>{name}</span>
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 

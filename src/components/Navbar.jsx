@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, FileDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -56,13 +56,22 @@ export const Navbar = () => {
               </a>
             ))}
 
+            {/* Tríptico descargable: DataOrbit en 1 minuto */}
+            <Link
+              to="/en-1-minuto"
+              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-orbit-blue/40 bg-orbit-blue/10 text-xs font-semibold text-orbit-blue-glow hover:text-white hover:border-orbit-blue-glow/70 transition-all duration-300"
+            >
+              <FileDown className="w-3.5 h-3.5" />
+              En 1 minuto
+            </Link>
+
             {/* EduOrbit Link - Compact & Balanced Badge */}
             <Link
               to="/eduorbit"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-indigo-950/70 border border-indigo-500/40 text-indigo-200 hover:text-white text-xs font-semibold hover:border-indigo-400/80 transition-all duration-300 group shadow-[0_0_12px_rgba(99,102,241,0.2)]"
             >
               <img
-                src="/logos/Eduview 360 blanco_v2.png"
+                src="/logos/logo-eduorbit_blanco.png"
                 alt="EduOrbit 360"
                 className="h-4 max-h-4 w-auto object-contain group-hover:scale-105 transition-transform"
               />
@@ -89,7 +98,7 @@ export const Navbar = () => {
               to="/eduorbit"
               className="px-2.5 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 text-xs font-medium flex items-center gap-1.5"
             >
-              <img src="/logos/Eduview 360 blanco_v2.png" alt="EduOrbit 360" className="h-3.5 max-h-3.5 w-auto object-contain" />
+              <img src="/logos/logo-eduorbit_blanco.png" alt="EduOrbit 360" className="h-3.5 max-h-3.5 w-auto object-contain" />
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -123,11 +132,19 @@ export const Navbar = () => {
                 </a>
               ))}
               <Link
+                to="/en-1-minuto"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-base font-medium text-orbit-blue-glow flex items-center gap-2 py-2 border-b border-slate-800/50"
+              >
+                <FileDown className="w-4 h-4" />
+                DataOrbit en 1 minuto
+              </Link>
+              <Link
                 to="/eduorbit"
                 onClick={() => setMobileMenuOpen(false)}
                 className="text-base font-medium text-indigo-300 flex items-center gap-2 py-2 border-b border-slate-800/50"
               >
-                <img src="/logos/Eduview 360 blanco_v2.png" alt="EduOrbit 360" className="h-4 max-h-4 w-auto object-contain" />
+                <img src="/logos/logo-eduorbit_blanco.png" alt="EduOrbit 360" className="h-4 max-h-4 w-auto object-contain" />
               </Link>
               <a
                 href="/#contacto"

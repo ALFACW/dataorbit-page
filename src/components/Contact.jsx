@@ -69,17 +69,20 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contacto" className="relative py-24 bg-[#EAF0F8] text-slate-900 overflow-hidden border-t border-slate-300">
-      
-      {/* Background Orbit circles */}
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] border border-slate-300/60 rounded-full pointer-events-none" />
+    <section id="contacto" className="relative py-24 bg-[#070A12] text-slate-900 overflow-hidden border-t border-white/5">
+
+      {/* Órbitas de fondo */}
+      <div className="absolute left-1/3 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[760px] h-[760px] border border-orbit-blue/10 rounded-full pointer-events-none" />
+      <div className="absolute left-1/3 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[1060px] h-[1060px] border border-white/[0.04] rounded-full pointer-events-none" />
+      <div className="absolute left-1/3 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[640px] h-[480px] bg-orbit-blue/15 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Form Side (Matching white form card with soft blue fields from PDF) */}
-          <div className="lg:col-span-7 bg-white rounded-3xl p-8 sm:p-10 shadow-2xl border border-slate-200">
+          <div className="relative overflow-hidden lg:col-span-7 bg-white rounded-3xl p-8 sm:p-10 shadow-[0_30px_80px_-20px_rgba(37,99,235,0.45)] border border-orbit-blue/20">
+            <span className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-orbit-blue via-sky-400 to-orbit-accent" />
             <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-2">
               Envíanos un mensaje
             </h3>
@@ -244,50 +247,50 @@ export const Contact = () => {
 
           {/* Right Text & Info Side (Matching text from PDF screenshot) */}
           <div className="lg:col-span-5 flex flex-col justify-center">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-orbit-blue bg-blue-100 px-3 py-1 rounded-full w-fit mb-4">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-orbit-blue-glow bg-orbit-blue/10 border border-orbit-blue/30 px-3 py-1 rounded-full w-fit mb-4">
               Contacto Directo
             </span>
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-6">
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-6">
               Contacto
             </h2>
-            <p className="text-lg text-slate-700 font-medium leading-relaxed mb-8">
+            <p className="text-lg text-slate-300 font-medium leading-relaxed mb-8">
               Llena el formulario a continuación y nos pondremos en contacto contigo lo antes posible.
               <br />
-              <strong className="text-slate-900">¡Esperamos saber de ti!</strong>
+              <strong className="text-white">¡Esperamos saber de ti!</strong>
             </p>
 
-            <div className="space-y-6 pt-4 border-t border-slate-300">
+            <div className="space-y-6 pt-4 border-t border-white/10">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-orbit-blue/10 text-orbit-blue flex items-center justify-center font-bold">
+                <div className="w-12 h-12 rounded-2xl border border-orbit-blue/30 bg-orbit-blue/15 text-orbit-blue-glow flex items-center justify-center font-bold">
                   <Mail className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 font-bold">Correo Electrónico</p>
-                  <a href="mailto:contacto@dataorbit.cl" className="text-base font-bold text-slate-900 hover:text-orbit-blue transition">
+                  <p className="text-xs text-slate-400 font-bold">Correo Electrónico</p>
+                  <a href="mailto:contacto@dataorbit.cl" className="text-base font-bold text-white hover:text-orbit-blue-glow transition">
                     contacto@dataorbit.cl
                   </a>
                 </div>
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-orbit-blue/10 text-orbit-blue flex items-center justify-center font-bold">
+                <div className="w-12 h-12 rounded-2xl border border-orbit-blue/30 bg-orbit-blue/15 text-orbit-blue-glow flex items-center justify-center font-bold">
                   <Phone className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 font-bold">Atención Ejecutiva</p>
-                  <p className="text-base font-bold text-slate-900">
+                  <p className="text-xs text-slate-400 font-bold">Atención Ejecutiva</p>
+                  <p className="text-base font-bold text-white">
                     +56 9 8452 1190
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-orbit-blue/10 text-orbit-blue flex items-center justify-center font-bold">
+                <div className="w-12 h-12 rounded-2xl border border-orbit-blue/30 bg-orbit-blue/15 text-orbit-blue-glow flex items-center justify-center font-bold">
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500 font-bold">Ubicación</p>
-                  <p className="text-base font-bold text-slate-900">
+                  <p className="text-xs text-slate-400 font-bold">Ubicación</p>
+                  <p className="text-base font-bold text-white">
                     Santiago & Puerto Montt, Chile
                   </p>
                 </div>
