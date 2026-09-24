@@ -3,6 +3,12 @@
   RewriteEngine On
   RewriteBase /
 
+  # Este .htaccess vive en public_html, donde también están las carpetas de los
+  # subdominios (api.dataorbit.cl, mowi.dataorbit.cl, ...). Sus reglas solo deben
+  # aplicar a dataorbit.cl y www: para cualquier otro host no se reescribe nada.
+  RewriteCond %{HTTP_HOST} !^(www\.)?dataorbit\.cl$ [NC]
+  RewriteRule ^ - [L]
+
   # Forzar HTTPS
   RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://dataorbit.cl/$1 [R=301,L]
@@ -30,16 +36,21 @@
 # 1. Desactivar listado de directorios
 Options -Indexes
 
+# Marca las visitas al sitio principal. Los bloqueos y cabeceras de abajo solo
+# aplican con esta marca, para no alterar los subdominios que viven en public_html.
+SetEnvIfNoCase Host ^(www\.)?dataorbit\.cl$ SITIO_PRINCIPAL
+
 # 2. Bloquear acceso a archivos sensibles y ocultos (.env, .git, .htaccess, respaldos)
 <FilesMatch "^\.|\.(bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|env|zip)$">
   Order allow,deny
-  Deny from all
+  Allow from all
+  Deny from env=SITIO_PRINCIPAL
 </FilesMatch>
 
-# 3. Cabeceras de seguridad HTTP
+# 3. Cabeceras de seguridad HTTP (por ejemplo, X-Frame-Options impediría incrustar un tablero)
 <IfModule mod_headers.c>
-  Header set X-Content-Type-Options "nosniff"
-  Header set X-Frame-Options "SAMEORIGIN"
-  Header set X-XSS-Protection "1; mode=block"
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set X-Content-Type-Options "nosniff" env=SITIO_PRINCIPAL
+  Header set X-Frame-Options "SAMEORIGIN" env=SITIO_PRINCIPAL
+  Header set X-XSS-Protection "1; mode=block" env=SITIO_PRINCIPAL
+  Header set Referrer-Policy "strict-origin-when-cross-origin" env=SITIO_PRINCIPAL
 </IfModule>
