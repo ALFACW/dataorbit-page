@@ -2,8 +2,8 @@
 # https://dataorbit.cl
 
 # Redirecciones 301 de URLs de WordPress antiguo
-/eduorbit-360           /                       301!
-/eduorbit-360/          /                       301!
+/eduorbit-360           /eduorbit               301!
+/eduorbit-360/          /eduorbit               301!
 /servicios              /#soluciones            301!
 /servicios/             /#soluciones            301!
 /contacto               /#contacto              301!

@@ -1,13 +1,3 @@
-# .htaccess de public_html (hosting cPanel de dataorbit.cl)
-#
-# OJO: en public_html también viven carpetas de subdominios en producción
-# (mowi.dataorbit.cl, api.dataorbit.cl), y este archivo les aplica. Por eso:
-#   - Todo lo que venía del .htaccess del WordPress (compresión, caché, bloqueos,
-#     manejador de PHP de cPanel) se conserva igual y sigue aplicando a todos.
-#   - Las reglas del sitio nuevo solo aplican a dataorbit.cl y www.
-#   - Para cualquier otro host se mantiene la regla de respaldo que tenía WordPress.
-# El original quedó en deploy/htaccess-wordpress-original.txt.
-
 <IfModule mod_deflate.c>SetOutputFilter DEFLATE
 <IfModule mod_setenvif.c>
 <IfModule mod_headers.c>
@@ -82,56 +72,21 @@ Allow from all
 Allow from all
 </Files>
 
-# Sitio principal: el HTML no se guarda en caché (la regla de 30 días de arriba
-# haría que una actualización tarde un mes en verse). Los JS y CSS llevan un hash
-# en el nombre y sí se cachean. Solo aplica con la marca de dataorbit.cl y www.
-<IfModule mod_setenvif.c>
-SetEnvIfNoCase Host ^(www\.)?dataorbit\.cl$ SITIO_PRINCIPAL
-</IfModule>
-<IfModule mod_headers.c>
-<FilesMatch "\.html$">
-Header set Cache-Control "no-cache" env=SITIO_PRINCIPAL
-</FilesMatch>
-</IfModule>
-
+# BEGIN WordPress
+# Las directivas (líneas) entre «BEGIN WordPress» y «END WordPress» son
+# generadas dinámicamente y solo deberían ser modificadas mediante filtros de WordPress.
+# Cualquier cambio en las directivas que hay entre esos marcadores serán sobrescritas.
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 RewriteBase /
-
-# --- Sitio principal (dataorbit.cl y www). Cada regla lleva su condición de host. ---
-
-# Forzar HTTPS
-RewriteCond %{HTTP_HOST} ^(www\.)?dataorbit\.cl$ [NC]
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://dataorbit.cl/$1 [R=301,L]
-
-# www a sin www (versión canónica única)
-RewriteCond %{HTTP_HOST} ^www\.dataorbit\.cl$ [NC]
-RewriteRule ^(.*)$ https://dataorbit.cl/$1 [R=301,L]
-
-# Rutas del WordPress antiguo
-RewriteCond %{HTTP_HOST} ^dataorbit\.cl$ [NC]
-RewriteRule ^eduorbit-360/?$ /eduorbit [R=301,L]
-RewriteCond %{HTTP_HOST} ^dataorbit\.cl$ [NC]
-RewriteRule ^servicios/?$ /#soluciones [R=301,NE,L]
-RewriteCond %{HTTP_HOST} ^dataorbit\.cl$ [NC]
-RewriteRule ^contacto/?$ /#contacto [R=301,NE,L]
-RewriteCond %{HTTP_HOST} ^dataorbit\.cl$ [NC]
-RewriteRule ^(feed|comments/feed|wp-login\.php|xmlrpc\.php)/?$ / [R=301,L]
-
-# Rutas de la aplicación (React): todo lo que no es un archivo real va a index.html
-RewriteCond %{HTTP_HOST} ^dataorbit\.cl$ [NC]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.html [L]
-
-# --- Cualquier otro host (subdominios en carpetas de public_html): igual que con WordPress ---
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
 </IfModule>
+
+# END WordPress
 
 # php -- BEGIN cPanel-generated handler, do not edit
 # Configure el paquete “ea-php81” como el lenguaje de programación predeterminado “PHP”.
