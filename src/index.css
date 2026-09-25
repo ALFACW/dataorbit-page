@@ -25,6 +25,14 @@ html.sin-diferir .secciones-diferidas > section {
   content-visibility: visible;
 }
 
+/* Los anillos y brillos de fondo (capas absolutas que no reciben clics) quedan
+   fuera del anclaje de scroll. Varios están centrados en su sección, así que se
+   corren cuando la sección cambia de alto (por ejemplo, al elegir otra etapa en
+   Soluciones), y si el navegador los toma de referencia mueve toda la pantalla. */
+.absolute.pointer-events-none {
+  overflow-anchor: none;
+}
+
 /* Rendimiento en celulares y tablets: los efectos que más le cuestan a un
    teléfono se reemplazan por versiones livianas. En computador no cambia nada. */
 @media (max-width: 1023px) {
