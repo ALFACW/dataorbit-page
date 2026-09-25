@@ -73,7 +73,7 @@ const differentiators = [
 ];
 
 const contact = [
-  { icon: Mail, text: 'contacto@dataorbit.cl' },
+  { icon: Mail, text: 'vicente@dataorbit.cl' },
   { icon: Phone, text: '+56 9 8452 1190' },
   { icon: MapPin, text: 'Santiago & Puerto Montt, Chile' },
   { icon: Globe, text: 'dataorbit.cl' },

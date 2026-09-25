@@ -29,3 +29,7 @@ pnpm-debug.log*
 *.sw?
 .DS_Store
 *.zip
+
+# Respaldos del hosting (traen contraseñas y datos del servidor: nunca a GitHub)
+Respaldos/
+*.tar.gz

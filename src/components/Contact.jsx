@@ -61,7 +61,7 @@ export const Contact = () => {
         setError('Error en el servidor al enviar el mensaje. Inténtalo de nuevo.');
       }
     } catch {
-      setError('Error de conexión. Puedes contactarnos directamente a contacto@dataorbit.cl o al +56 9 8452 1190');
+      setError('Error de conexión. Puedes contactarnos directamente a vicente@dataorbit.cl o al +56 9 8452 1190');
     } finally {
       setLoading(false);
     }
@@ -274,8 +274,8 @@ export const Contact = () => {
                 </div>
                 <div>
                   <p className="text-xs text-slate-400 font-bold">Correo Electrónico</p>
-                  <a href="mailto:contacto@dataorbit.cl" className="text-base font-bold text-white hover:text-orbit-blue-glow transition">
-                    contacto@dataorbit.cl
+                  <a href="mailto:vicente@dataorbit.cl" className="text-base font-bold text-white hover:text-orbit-blue-glow transition">
+                    vicente@dataorbit.cl
                   </a>
                 </div>
               </div>

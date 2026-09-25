@@ -63,7 +63,7 @@ export const EduOrbitPage = () => {
       }
       setError(data?.error || 'No se pudo enviar el mensaje. Inténtalo de nuevo.');
     } catch {
-      setError('Error de conexión. Puedes escribirnos directamente a contacto@dataorbit.cl');
+      setError('Error de conexión. Puedes escribirnos directamente a vicente@dataorbit.cl');
     } finally {
       setLoading(false);
     }
@@ -234,7 +234,7 @@ export const EduOrbitPage = () => {
 
           <div className="flex items-center gap-6 font-medium">
             <Link to="/" className="hover:text-white transition">Inicio DataOrbit</Link>
-            <a href="mailto:contacto@dataorbit.cl" className="hover:text-white transition">contacto@dataorbit.cl</a>
+            <a href="mailto:vicente@dataorbit.cl" className="hover:text-white transition">vicente@dataorbit.cl</a>
             <span>+56 9 8452 1190</span>
           </div>
         </div>
