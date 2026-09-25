@@ -74,6 +74,14 @@ order allow,deny
 deny from all
 </files>
 
+# Credenciales y secretos: nunca se sirven por web, en ninguna carpeta de public_html
+# (por ejemplo api.dataorbit.cl/mowi-credentials.json quedaba descargable). Los
+# programas que los usan los leen directo del disco, así que esto no los afecta.
+<FilesMatch "(?i)(credential|secret|\.env|\.pem$|\.key$|\.p12$)">
+Order allow,deny
+Deny from all
+</FilesMatch>
+
 <Files robots.txt>
 Allow from all
 </Files>
