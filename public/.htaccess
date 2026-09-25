@@ -120,11 +120,12 @@ RewriteRule ^contacto/?$ /#contacto [R=301,NE,L]
 RewriteCond %{HTTP_HOST} ^dataorbit\.cl$ [NC]
 RewriteRule ^(feed|comments/feed|wp-login\.php|xmlrpc\.php)/?$ / [R=301,L]
 
-# Rutas de la aplicación (React): todo lo que no es un archivo real va a index.html
+# Rutas de la aplicación (React): todo lo que no es un archivo real va a app.html.
+# index.html trae el home pre-renderizado; app.html es la página vacía para el resto.
 RewriteCond %{HTTP_HOST} ^dataorbit\.cl$ [NC]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.html [L]
+RewriteRule . /app.html [L]
 
 # --- Cualquier otro host (subdominios en carpetas de public_html): igual que con WordPress ---
 RewriteRule ^index\.php$ - [L]

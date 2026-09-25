@@ -114,7 +114,8 @@ export const WhyNow = () => {
             </span>
           </h2>
           <p className="mt-4 text-sm text-slate-400 sm:text-base">
-            Pasa el cursor sobre cada tarjeta para ver cómo se resuelve.
+            <span className="lg:hidden">Toca</span>
+            <span className="hidden lg:inline">Pasa el cursor sobre</span> cada tarjeta para ver cómo se resuelve.
           </p>
         </div>
 

@@ -238,7 +238,10 @@ export const EduProblems = () => {
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl">
             El <span className="text-amber-400">problema</span>
           </h2>
-          <p className="mt-3 text-sm text-slate-400">Pasa el cursor sobre cada tema para ver qué hay detrás.</p>
+          <p className="mt-3 text-sm text-slate-400">
+            <span className="lg:hidden">Toca</span>
+            <span className="hidden lg:inline">Pasa el cursor sobre</span> cada tema para ver qué hay detrás.
+          </p>
         </div>
 
         <div

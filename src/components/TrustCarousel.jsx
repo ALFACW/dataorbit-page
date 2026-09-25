@@ -54,6 +54,8 @@ export const TrustCarousel = () => {
                 <img
                   src={client.logoUrl}
                   alt={client.name}
+                  loading="lazy"
+                  decoding="async"
                   className="h-14 sm:h-20 max-w-[200px] sm:max-w-[260px] w-auto object-contain opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300 filter drop-shadow-[0_4px_16px_rgba(255,255,255,0.06)]"
                 />
               </div>

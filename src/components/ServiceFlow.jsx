@@ -264,9 +264,13 @@ export const ServiceFlow = ({ className = 'mt-20', onSelectService, onSelectFami
           que corren en paralelo, y termina donde empezó: midiendo.
         </p>
         <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
-          {clickable
-            ? 'Pasa el cursor sobre cada etapa y haz clic para ver su detalle'
-            : 'Pasa el cursor sobre cada etapa para ver el detalle'}
+          {/* En pantallas táctiles no hay cursor */}
+          <span className="lg:hidden">{clickable ? 'Toca cada etapa para ver su detalle' : 'Toca cada etapa para ver el detalle'}</span>
+          <span className="hidden lg:inline">
+            {clickable
+              ? 'Pasa el cursor sobre cada etapa y haz clic para ver su detalle'
+              : 'Pasa el cursor sobre cada etapa para ver el detalle'}
+          </span>
         </p>
       </motion.div>
 

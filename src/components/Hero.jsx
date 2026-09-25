@@ -18,13 +18,10 @@ export const Hero = () => {
       {/* Main Container */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
 
-        {/* Main Headline: la palabra que rota va en su propia línea para no dejar huecos */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15]"
-        >
+        {/* Main Headline: la palabra que rota va en su propia línea para no dejar huecos.
+            El título y la bajada aparecen de inmediato (sin animación de entrada): son lo
+            primero que se lee y lo que Google mide como carga principal. */}
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15]">
           Preparamos tu
           <span className="block font-black">
             <RotatingWord
@@ -34,19 +31,14 @@ export const Hero = () => {
             />
           </span>
           para operar con IA
-        </motion.h1>
+        </h1>
 
         {/* Subheadline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-6 text-base sm:text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal"
-        >
+        <p className="mt-6 text-base sm:text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal">
           Ordenamos tus datos, conectamos tus sistemas y construimos la plataforma que tu operación
           necesita. Te acompañamos hasta que la IA trabaja en el día a día, medimos el antes y el después,
           y respondemos por el resultado.
-        </motion.p>
+        </p>
 
         {/* Action Buttons */}
         <motion.div

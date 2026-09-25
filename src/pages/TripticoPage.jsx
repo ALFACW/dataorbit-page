@@ -89,8 +89,9 @@ const PanelTag = ({ num, children }) => (
 );
 
 export const TripticoPage = () => {
+  // Al abrir la página se parte desde arriba, salvo que se haya llegado a una sección con #
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (!window.location.hash) window.scrollTo(0, 0);
   }, []);
 
   return (

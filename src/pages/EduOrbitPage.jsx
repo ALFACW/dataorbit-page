@@ -25,8 +25,9 @@ export const EduOrbitPage = () => {
     website_url: '', // Honeypot: queda oculto para las personas; si llega con algo, es un bot
   });
 
+  // Al abrir la página se parte desde arriba, salvo que se haya llegado a una sección con #
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (!window.location.hash) window.scrollTo(0, 0);
   }, []);
 
   // Mismo backend que el formulario del home. El asunto identifica que la consulta viene de EduOrbit 360.
@@ -71,7 +72,7 @@ export const EduOrbitPage = () => {
   const update = (field) => (e) => setFormData({ ...formData, [field]: e.target.value });
 
   return (
-    <div className="min-h-screen bg-[#070A12] text-white selection:bg-emerald-500 selection:text-white font-sans">
+    <div className="secciones-diferidas min-h-screen bg-[#070A12] text-white selection:bg-emerald-500 selection:text-white font-sans">
 
       {/* Sticky Header */}
       <header className="fixed top-0 left-0 right-0 z-50 glass-nav py-4 border-b border-slate-800">
