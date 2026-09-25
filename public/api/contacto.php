@@ -61,7 +61,9 @@ if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
 }
 
 // Configuración del correo
-$destinatario = 'contacto@dataorbit.cl';
+// contacto@dataorbit.cl no existe en Microsoft 365 (rebota), así que los mensajes
+// van directo a Vicente, igual que en el formulario del WordPress antiguo.
+$destinatario = 'vicente@dataorbit.cl';
 $tituloCorreo = "[Contacto Web DataOrbit] " . htmlspecialchars($asunto);
 
 // Cuerpo en formato HTML elegante
