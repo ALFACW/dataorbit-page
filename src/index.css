@@ -8,6 +8,50 @@
   }
 }
 
+/* Rendimiento: las secciones que no se ven todavía no se procesan (estilos,
+   ubicación y dibujo) hasta que el usuario se acerca a ellas. En el home son
+   las de <main> después del hero; en EduOrbit, las que siguen al hero. */
+main > section:not(:first-child),
+.secciones-diferidas > section:nth-of-type(n + 2) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+/* Al saltar a una sección (#soluciones, #contacto...) se procesan todas antes de
+   desplazarse: con alturas estimadas, el destino quedaría corrido. La clase la
+   pone main.jsx al tocar un enlace con # o al llegar con uno en la dirección. */
+html.sin-diferir main > section,
+html.sin-diferir .secciones-diferidas > section {
+  content-visibility: visible;
+}
+
+/* Rendimiento en celulares y tablets: los efectos que más le cuestan a un
+   teléfono se reemplazan por versiones livianas. En computador no cambia nada. */
+@media (max-width: 1023px) {
+  /* Brillos decorativos: un desenfoque de 100+ px es carísimo de dibujar; una
+     máscara radial da un efecto parecido a una fracción del costo. */
+  [class*='blur-['] {
+    filter: none !important;
+    -webkit-mask-image: radial-gradient(closest-side, #000, transparent);
+    mask-image: radial-gradient(closest-side, #000, transparent);
+  }
+  /* Vidrio esmerilado: se reemplaza por fondos sólidos */
+  [class*='backdrop-blur'],
+  .glass-nav,
+  .glass-panel {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+  .glass-nav {
+    background: rgba(8, 12, 20, 0.96);
+  }
+  /* Sombras dibujadas sobre imágenes y trazos animados */
+  [class*='drop-shadow'],
+  [style*='drop-shadow'] {
+    filter: none !important;
+  }
+}
+
 /* Respeto a accesibilidad de reducción de movimiento */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
@@ -67,6 +111,53 @@
 
 .tech-pulse {
   animation: techPulse 3.5s ease-in-out infinite;
+}
+
+/* Grilla técnica de fondo; la variante "drift" la desplaza lentamente */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@keyframes gridDrift {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 40px 40px, 40px 40px; }
+}
+
+.bg-grid-drift {
+  animation: gridDrift 6s linear infinite;
+}
+
+/* Tríptico "DataOrbit en 1 minuto": al imprimir, la hoja ocupa un A4
+   horizontal sin márgenes y conserva fondos y colores. La página con nombre
+   evita que el formato afecte la impresión del resto del sitio. */
+@page triptico {
+  size: A4 landscape;
+  margin: 0;
+}
+
+@media print {
+  .print-triptico {
+    page: triptico;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .print-triptico * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* Trazo punteado que avanza a lo largo de una conexión SVG */
+@keyframes dashFlow {
+  to { stroke-dashoffset: -32; }
+}
+
+.dash-flow {
+  stroke-dasharray: 6 10;
+  animation: dashFlow 1.2s linear infinite;
 }
 
 /* Custom Scrollbar */

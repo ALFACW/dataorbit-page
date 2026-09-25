@@ -6,6 +6,10 @@ export const HeroCanvas = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    // En celulares y tablets (sin mouse que interactúe) y con "reducir movimiento",
+    // la red de partículas no se dibuja: es una animación continua que el
+    // teléfono paga en batería y fluidez.
+    if (window.matchMedia('(max-width: 1023px), (prefers-reduced-motion: reduce)').matches) return;
     const ctx = canvas.getContext('2d');
     let animationFrameId;
     let isVisible = true;

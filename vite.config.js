@@ -39,6 +39,11 @@ const phpApiDevPlugin = () => ({
         let output = '';
         let errorOutput = '';
 
+        // Si PHP no está instalado (spawn ENOENT), un error sin manejar tumba el
+        // servidor de Vite. Se ignora aquí y 'close' responde con el simulador de dev.
+        phpProcess.on('error', () => {});
+        phpProcess.stdin.on('error', () => {});
+
         phpProcess.stdin.write(body);
         phpProcess.stdin.end();
 

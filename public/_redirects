@@ -2,8 +2,8 @@
 # https://dataorbit.cl
 
 # Redirecciones 301 de URLs de WordPress antiguo
-/eduorbit-360           /                       301!
-/eduorbit-360/          /                       301!
+/eduorbit-360           /eduorbit               301!
+/eduorbit-360/          /eduorbit               301!
 /servicios              /#soluciones            301!
 /servicios/             /#soluciones            301!
 /contacto               /#contacto              301!
@@ -17,5 +17,5 @@
 http://www.dataorbit.cl/*   https://dataorbit.cl/:splat  301!
 https://www.dataorbit.cl/*  https://dataorbit.cl/:splat  301!
 
-# SPA Fallback: todas las demás rutas sirven index.html
-/*                      /index.html             200
+# SPA Fallback: las demás rutas sirven app.html (index.html trae el home pre-renderizado)
+/*                      /app.html               200

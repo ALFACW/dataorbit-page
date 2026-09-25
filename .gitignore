@@ -10,6 +10,8 @@ dist-ssr
 .env
 .env.local
 .env.*.local
+# Credenciales de "npm run deploy" (la plantilla .env.deploy.example sí se sube)
+.env.deploy
 
 # Logs
 npm-debug.log*
@@ -27,3 +29,7 @@ pnpm-debug.log*
 *.sw?
 .DS_Store
 *.zip
+
+# Respaldos del hosting (traen contraseñas y datos del servidor: nunca a GitHub)
+Respaldos/
+*.tar.gz

@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, ChevronRight } from 'lucide-react';
 import { HeroCanvas } from './HeroCanvas';
+import { RotatingWord } from './RotatingWord';
 
 export const Hero = () => {
   return (
@@ -17,31 +18,27 @@ export const Hero = () => {
       {/* Main Container */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
 
-        {/* Main Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15]"
-        >
-          Transformamos tus{' '}
-          <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-400 font-black">
-            datos
-            <span className="absolute left-0 bottom-1 w-full h-[4px] bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full blur-[2px] opacity-80" />
-          </span>{' '}
-          en decisiones estratégicas que impulsan tu negocio
-        </motion.h1>
+        {/* Main Headline: la palabra que rota va en su propia línea para no dejar huecos.
+            El título y la bajada aparecen de inmediato (sin animación de entrada): son lo
+            primero que se lee y lo que Google mide como carga principal. */}
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15]">
+          Preparamos tu
+          <span className="block font-black">
+            <RotatingWord
+              words={['empresa', 'planta', 'área comercial', 'colegio']}
+              intervalMs={2600}
+              className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-400 pb-1"
+            />
+          </span>
+          para operar con IA
+        </h1>
 
         {/* Subheadline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-6 text-base sm:text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal"
-        >
-          Extraemos el verdadero valor de tus datos mediante análisis avanzados, automatización y modelos predictivos.{' '}
-          Optimizamos procesos, reducimos la incertidumbre y transformamos la información en estrategias claras y accionables.
-        </motion.p>
+        <p className="mt-6 text-base sm:text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal">
+          Ordenamos tus datos, conectamos tus sistemas y construimos la plataforma que tu operación
+          necesita. Te acompañamos hasta que la IA trabaja en el día a día, medimos el antes y el después,
+          y respondemos por el resultado.
+        </p>
 
         {/* Action Buttons */}
         <motion.div
@@ -55,7 +52,7 @@ export const Hero = () => {
             className="w-full sm:w-auto relative group overflow-hidden px-10 py-4 rounded-full font-bold text-base text-white bg-gradient-to-r from-orbit-blue via-blue-600 to-indigo-600 shadow-[0_0_30px_rgba(37,99,235,0.4)] transition-all duration-300 hover:shadow-[0_0_45px_rgba(59,130,246,0.6)] hover:scale-105 active:scale-95"
           >
             <span className="relative z-10 flex items-center justify-center gap-2">
-              Contáctanos
+              Conversemos 20 minutos
               <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </span>
             <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -65,7 +62,7 @@ export const Hero = () => {
             href="#soluciones"
             className="w-full sm:w-auto px-10 py-4 rounded-full font-semibold text-base text-slate-200 glass-panel border border-slate-700/60 hover:border-slate-500 hover:text-white transition-all duration-300 hover:bg-slate-800/50 text-center"
           >
-            Explorar Soluciones
+            Cómo trabajamos
           </a>
         </motion.div>
 

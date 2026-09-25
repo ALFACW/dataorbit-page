@@ -190,7 +190,7 @@ export const EduOrbit360 = ({ isOpen, onClose }) => {
 
             <div className="relative z-10 flex flex-col items-center">
               <img
-                src="/logos/Eduview 360 blanco.png"
+                src="/logos/logo-eduorbit_blanco.png"
                 alt="EduOrbit 360 Logo"
                 className="h-20 sm:h-28 w-auto mb-6 object-contain filter drop-shadow-[0_0_20px_rgba(59,130,246,0.5)]"
               />
