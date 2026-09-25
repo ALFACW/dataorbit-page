@@ -5,7 +5,8 @@ import { useRotation } from '../hooks/useCycle';
 /**
  * Palabra que va cambiando entre varios conceptos con una transición vertical.
  * El ancho se reserva con la palabra más larga para que el texto de alrededor
- * no salte en cada cambio.
+ * no salte en cada cambio. La palabra nueva entra mientras sale la anterior
+ * (las dos van superpuestas), así la línea nunca queda vacía.
  */
 export const RotatingWord = ({ words, intervalMs = 2400, className = '' }) => {
   const [index] = useRotation(words.length, { intervalMs });
@@ -18,15 +19,15 @@ export const RotatingWord = ({ words, intervalMs = 2400, className = '' }) => {
         {longest}
       </span>
       <span className="sr-only">{words.join(', ')}</span>
-      <span className="col-start-1 row-start-1 overflow-hidden" aria-hidden="true">
-        <AnimatePresence mode="wait" initial={false}>
+      <span className="relative col-start-1 row-start-1 overflow-hidden" aria-hidden="true">
+        <AnimatePresence initial={false}>
           <motion.span
             key={words[index]}
-            className={`block ${className}`}
+            className={`absolute inset-x-0 top-0 block ${className}`}
             initial={{ y: '100%', opacity: 0 }}
             animate={{ y: '0%', opacity: 1 }}
             exit={{ y: '-100%', opacity: 0 }}
-            transition={{ duration: 0.35, ease: 'easeOut' }}
+            transition={{ duration: 0.45, ease: 'easeInOut' }}
           >
             {words[index]}
           </motion.span>
