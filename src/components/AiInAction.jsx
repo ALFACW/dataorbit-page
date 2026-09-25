@@ -121,6 +121,46 @@ export const AiInAction = () => {
 
   const finished = step >= sc.steps.length;
 
+  // Lo que queda en el sistema. Se dibuja dos veces: invisible desde el inicio, para
+  // reservar su alto, y visible (con animación) cuando el agente termina.
+  const resultado = (animado) => (
+    <>
+      <ul className="space-y-2">
+        {sc.rows.map((r, i) => (
+          <motion.li
+            key={r.a}
+            initial={animado && !reduceMotion ? { opacity: 0, x: -10 } : false}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: reduceMotion ? 0 : i * 0.1 }}
+            className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-0.5 rounded-xl border border-emerald-400/20 bg-emerald-500/[0.06] px-3.5 py-3 text-sm sm:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)]"
+          >
+            {/* En móvil el detalle baja a una segunda línea para no cortarse */}
+            <span className="truncate font-semibold text-white">{r.a}</span>
+            <span className="order-last col-span-2 text-xs text-slate-400 sm:order-none sm:col-span-1 sm:truncate sm:text-sm">{r.b}</span>
+            <span className="text-right font-semibold text-emerald-300 sm:truncate">{r.c}</span>
+          </motion.li>
+        ))}
+      </ul>
+
+      {sc.needsApproval && (
+        <div className="mt-5 rounded-2xl border border-amber-400/30 bg-amber-500/[0.07] p-4">
+          <p className="flex items-center gap-2 text-sm font-bold text-amber-200">
+            <ShieldCheck className="h-4 w-4" />
+            Resguardo: compromete dinero, necesita tu aprobación
+          </p>
+          <button
+            type="button"
+            onClick={() => setApproved(true)}
+            disabled={approved}
+            className="mt-3 rounded-full bg-emerald-600 px-4 py-2 text-xs font-bold text-white transition hover:bg-emerald-500 disabled:opacity-60"
+          >
+            {approved ? 'Aprobada' : 'Aprobar'}
+          </button>
+        </div>
+      )}
+    </>
+  );
+
   return (
     <section id="ia-en-accion" ref={ref} className="relative overflow-hidden border-t border-white/5 bg-[#0A0F1A] px-4 py-24 text-white sm:px-6 lg:px-8">
       <div className="bg-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_25%,transparent_75%)]" />
@@ -188,9 +228,14 @@ export const AiInAction = () => {
             {/* Pedido */}
             <div className="flex justify-end">
               <div className="flex max-w-[85%] items-start gap-2.5 rounded-2xl rounded-tr-sm bg-orbit-blue/25 px-4 py-3 text-sm text-white">
-                <span className="min-h-[1.25rem]">
-                  {sc.prompt.slice(0, typed)}
-                  {typed < sc.prompt.length && <span className="ml-0.5 inline-block h-4 w-px animate-pulse bg-white align-middle" />}
+                {/* La frase completa, invisible, reserva el alto final: así el globo no
+                    crece mientras se escribe ni empuja los pasos hacia abajo */}
+                <span className="grid min-h-[1.25rem]">
+                  <span aria-hidden="true" className="invisible col-start-1 row-start-1">{sc.prompt}</span>
+                  <span className="col-start-1 row-start-1">
+                    {sc.prompt.slice(0, typed)}
+                    {typed < sc.prompt.length && <span className="ml-0.5 inline-block h-4 w-px animate-pulse bg-white align-middle" />}
+                  </span>
                 </span>
                 <User className="mt-0.5 h-4 w-4 flex-shrink-0 text-orbit-blue-glow" />
               </div>
@@ -245,62 +290,37 @@ export const AiInAction = () => {
               Tu sistema <span className="text-slate-500">· {sc.system}</span>
             </p>
 
-            <AnimatePresence mode="wait">
-              {finished ? (
-                <motion.div
-                  key={`${sc.id}-${run}`}
-                  initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.35 }}
-                >
-                  <ul className="space-y-2">
-                    {sc.rows.map((r, i) => (
-                      <motion.li
-                        key={r.a}
-                        initial={reduceMotion ? false : { opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: reduceMotion ? 0 : i * 0.1 }}
-                        className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-0.5 rounded-xl border border-emerald-400/20 bg-emerald-500/[0.06] px-3.5 py-3 text-sm sm:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)]"
-                      >
-                        {/* En móvil el detalle baja a una segunda línea para no cortarse */}
-                        <span className="truncate font-semibold text-white">{r.a}</span>
-                        <span className="order-last col-span-2 text-xs text-slate-400 sm:order-none sm:col-span-1 sm:truncate sm:text-sm">{r.b}</span>
-                        <span className="text-right font-semibold text-emerald-300 sm:truncate">{r.c}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-
-                  {sc.needsApproval && (
-                    <div className="mt-5 rounded-2xl border border-amber-400/30 bg-amber-500/[0.07] p-4">
-                      <p className="flex items-center gap-2 text-sm font-bold text-amber-200">
-                        <ShieldCheck className="h-4 w-4" />
-                        Resguardo: compromete dinero, necesita tu aprobación
-                      </p>
-                      <button
-                        type="button"
-                        onClick={() => setApproved(true)}
-                        disabled={approved}
-                        className="mt-3 rounded-full bg-emerald-600 px-4 py-2 text-xs font-bold text-white transition hover:bg-emerald-500 disabled:opacity-60"
-                      >
-                        {approved ? 'Aprobada' : 'Aprobar'}
-                      </button>
-                    </div>
+            <div className="grid">
+              <div aria-hidden="true" className="invisible col-start-1 row-start-1">
+                {resultado(false)}
+              </div>
+              <div className="col-start-1 row-start-1">
+                <AnimatePresence mode="wait">
+                  {finished ? (
+                    <motion.div
+                      key={`${sc.id}-${run}`}
+                      initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.35 }}
+                    >
+                      {resultado(true)}
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="espera"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="flex h-full min-h-[9rem] flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-white/10 text-sm text-slate-500"
+                    >
+                      <Loader2 className="h-5 w-5 animate-spin text-orbit-blue-glow/70" />
+                      El agente está trabajando…
+                    </motion.div>
                   )}
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="espera"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex h-48 flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-white/10 text-sm text-slate-500"
-                >
-                  <Loader2 className="h-5 w-5 animate-spin text-orbit-blue-glow/70" />
-                  El agente está trabajando…
-                </motion.div>
-              )}
-            </AnimatePresence>
+                </AnimatePresence>
+              </div>
+            </div>
           </div>
         </div>
       </div>
