@@ -130,7 +130,10 @@ $headers[] = 'From: DataOrbit Web <contacto@dataorbit.cl>';
 $headers[] = 'Reply-To: ' . htmlspecialchars($nombre) . ' <' . $correo . '>';
 $headers[] = 'X-Mailer: PHP/' . phpversion();
 
-$enviado = @mail($destinatario, $tituloCorreo, $cuerpoHtml, implode("\r\n", $headers));
+// -f fija el remitente del sobre (Return-Path) en @dataorbit.cl. Sin esto sale como
+// la cuenta del hosting (@pymedns.net), el SPF no calza con el From y Microsoft 365
+// puede tratar el correo como suplantación del dominio.
+$enviado = @mail($destinatario, $tituloCorreo, $cuerpoHtml, implode("\r\n", $headers), '-fcontacto@dataorbit.cl');
 
 if ($enviado) {
     http_response_code(200);
